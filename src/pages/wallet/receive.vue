@@ -1,9 +1,9 @@
 <template>
 <q-page class="receive">
-    <q-list link no-border :dark="theme=='dark'" class="loki-list">
+    <q-list link no-border :dark="theme=='dark'" class="triton-list">
 
         <q-list-header>My primary address</q-list-header>
-        <q-list class="loki-list-item primary-address" no-border v-for="address in address_list.primary" :key="address.address" @click.native="details(address)">
+        <q-list class="triton-list-item primary-address" no-border v-for="address in address_list.primary" :key="address.address" @click.native="details(address)">
             <q-item>
                 <q-item-main>
                     <q-item-tile class="ellipsis" label>{{ address.address }}</q-item-tile>
@@ -67,7 +67,7 @@
 
         <template v-if="address_list.used.length">
             <q-list-header>My used addresses</q-list-header>
-            <q-list class="loki-list-item" no-border v-for="address in address_list.used" @click.native="details(address)" :key="address.address">
+            <q-list class="triton-list-item" no-border v-for="address in address_list.used" @click.native="details(address)" :key="address.address">
                 <q-item>
                     <q-item-main>
                         <q-item-tile class="ellipsis" label>{{ address.address }}</q-item-tile>
@@ -133,7 +133,7 @@
 
         <template v-if="address_list.unused.length">
             <q-list-header>My unused addresses</q-list-header>
-            <q-list class="loki-list-item" no-border v-for="address in address_list.unused" @click.native="details(address)" :key="address.address">
+            <q-list class="triton-list-item" no-border v-for="address in address_list.unused" @click.native="details(address)" :key="address.address">
                 <q-item>
                     <q-item-main>
                         <q-item-tile class="ellipsis" label>{{ address.address }}</q-item-tile>
@@ -303,7 +303,7 @@ export default {
         font-size: 13px;
     }
 
-    .loki-list-item {
+    .triton-list-item {
         cursor: pointer;
 
         .q-item {

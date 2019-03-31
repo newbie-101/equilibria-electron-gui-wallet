@@ -6,8 +6,8 @@
     </div>
 
     <template v-if="address_book_combined.length">
-        <q-list link no-border :dark="theme=='dark'" class="loki-list">
-            <q-item class="loki-list-item" v-for="(entry, index) in address_book_combined" @click.native="details(entry)" :key="entry.address">
+        <q-list link no-border :dark="theme=='dark'" class="triton-list">
+            <q-item class="triton-list-item" v-for="(entry, index) in address_book_combined" @click.native="details(entry)" :key="entry.address">
                 <q-item-main>
                     <q-item-tile class="ellipsis" label>{{ entry.address }}</q-item-tile>
                     <q-item-tile sublabel>{{ entry.name }}</q-item-tile>
@@ -159,7 +159,7 @@ export default {
         font-weight: 500
     }
 
-    .loki-list-item {
+    .triton-list-item {
         cursor: pointer;
         padding-top: 12px;
         padding-bottom: 12px;

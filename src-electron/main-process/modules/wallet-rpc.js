@@ -91,9 +91,9 @@ export class WalletRPC {
                 if (!fs.existsSync(this.wallet_dir)) { fs.mkdirpSync(this.wallet_dir) }
 
                 if (process.platform === "win32") {
-                    this.walletRPCProcess = child_process.spawn(path.join(__ryo_bin, "loki-wallet-rpc.exe"), args)
+                    this.walletRPCProcess = child_process.spawn(path.join(__ryo_bin, "triton-wallet-rpc.exe"), args)
                 } else {
-                    this.walletRPCProcess = child_process.spawn(path.join(__ryo_bin, "loki-wallet-rpc"), args, {
+                    this.walletRPCProcess = child_process.spawn(path.join(__ryo_bin, "triton-wallet-rpc"), args, {
                         detached: true
                     })
                 }
@@ -187,7 +187,7 @@ export class WalletRPC {
             break
 
         case "restore_view_wallet":
-            // TODO: Decide if we want this for loki
+            // TODO: Decide if we want this for triton
             this.restoreViewWallet(params.name, params.password, params.address, params.viewkey,
                 params.refresh_type, params.refresh_type == "date" ? params.refresh_start_date : params.refresh_start_height)
             break
@@ -1359,9 +1359,9 @@ export class WalletRPC {
             wallets.legacy = []
             let legacy_paths = []
             if (os.platform() == "win32") {
-                legacy_paths = ["C:\\ProgramData\\Loki"]
+                legacy_paths = ["C:\\ProgramData\\triton"]
             } else {
-                legacy_paths = [path.join(os.homedir(), "Loki")]
+                legacy_paths = [path.join(os.homedir(), "triton")]
             }
             for (var i = 0; i < legacy_paths.length; i++) {
                 let legacy_config_path = path.join(legacy_paths[i], "config", "wallet_info.json")

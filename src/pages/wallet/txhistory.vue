@@ -7,21 +7,21 @@
             Transactions
         </div>
 
-        <LokiField class="col-5 q-px-sm" label="Filter by txid">
+        <tritonField class="col-5 q-px-sm" label="Filter by txid">
             <q-input v-model="tx_txid"
                      :dark="theme=='dark'"
                      placeholder="Enter an ID"
                      hide-underline
                      />
-        </LokiField>
+        </tritonField>
 
-        <LokiField class="col-2" label="Filter by transaction type">
+        <tritonField class="col-2" label="Filter by transaction type">
             <q-select :dark="theme=='dark'"
                       v-model="tx_type"
                       :options="tx_type_options"
                       hide-underline
                       />
-        </LokiField>
+        </tritonField>
 
     </div>
     <TxList :type="tx_type" :txid="tx_txid" />
@@ -31,7 +31,7 @@
 <script>
 import { mapState } from "vuex"
 import TxList from "components/tx_list"
-import LokiField from "components/loki_field"
+import tritonField from "components/triton_field"
 export default {
     data () {
         return {
@@ -58,7 +58,7 @@ export default {
 
     components: {
         TxList,
-        LokiField
+        tritonField
     }
 
 }

@@ -46,14 +46,14 @@
                 <div class="infoBox">
                     <div class="infoBoxContent">
                         <div class="text"><span>Amount</span></div>
-                        <div class="value"><span><FormatLoki :amount="tx.amount" /></span></div>
+                        <div class="value"><span><Formattriton :amount="tx.amount" /></span></div>
                     </div>
                 </div>
 
                 <div class="infoBox">
                     <div class="infoBoxContent">
                         <div class="text"><span>Fee <template v-if="tx.type=='in'||tx.type=='pool'">(paid by sender)</template></span></div>
-                        <div class="value"><span><FormatLoki :amount="tx.fee" /></span></div>
+                        <div class="value"><span><Formattriton :amount="tx.fee" /></span></div>
                     </div>
                 </div>
 
@@ -111,7 +111,7 @@
                             <q-item-main>
                                 <q-item-tile label>{{ destination.name }}</q-item-tile>
                                 <q-item-tile class="monospace ellipsis" sublabel>{{ destination.address }}</q-item-tile>
-                                <q-item-tile sublabel><FormatLoki :amount="destination.amount" /></q-item-tile>
+                                <q-item-tile sublabel><Formattriton :amount="destination.amount" /></q-item-tile>
                             </q-item-main>
                             <q-context-menu>
                                 <q-list link separator style="min-width: 150px; max-height: 300px;">
@@ -161,7 +161,7 @@ import { mapState } from "vuex"
 import { date } from "quasar"
 const { formatDate } = date
 import TxTypeIcon from "components/tx_type_icon"
-import FormatLoki from "components/format_loki"
+import Formattriton from "components/format_triton"
 export default {
     name: "TxDetails",
     computed: mapState({
@@ -277,7 +277,7 @@ export default {
     },
     components: {
         TxTypeIcon,
-        FormatLoki
+        Formattriton
     }
 }
 </script>

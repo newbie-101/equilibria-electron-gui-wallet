@@ -2,7 +2,7 @@
 <q-page>
     <div class="q-mx-md import-wallet">
 
-        <LokiField label="New wallet name" :error="$v.wallet.name.$error">
+        <tritonField label="New wallet name" :error="$v.wallet.name.$error">
             <q-input
                 v-model="wallet.name"
                 placeholder="A name for your wallet"
@@ -10,21 +10,21 @@
                 :dark="theme=='dark'"
                 hide-underline
                 />
-        </LokiField>
+        </tritonField>
 
-        <LokiField label="Wallet file" disable-hover>
+        <tritonField label="Wallet file" disable-hover>
             <q-input v-model="wallet.path" placeholder="Please select a file" disable :dark="theme=='dark'" hide-underline/>
             <input type="file" id="walletPath" v-on:change="setWalletPath" ref="fileInput" hidden />
             <q-btn color="secondary" v-on:click="selectFile" :text-color="theme=='dark'?'white':'dark'">Select wallet file</q-btn>
-        </LokiField>
+        </tritonField>
 
-        <LokiField label="Password">
+        <tritonField label="Password">
             <q-input v-model="wallet.password" placeholder="An optional password for the wallet" type="password" :dark="theme=='dark'" hide-underline />
-        </LokiField>
+        </tritonField>
 
-        <LokiField label="Confirm Password">
+        <tritonField label="Confirm Password">
             <q-input v-model="wallet.password_confirm" type="password" :dark="theme=='dark'" hide-underline />
-        </LokiField>
+        </tritonField>
 
         <q-field>
             <q-btn color="primary" @click="import_wallet" label="Import wallet" />
@@ -38,7 +38,7 @@
 <script>
 import { required } from "vuelidate/lib/validators"
 import { mapState } from "vuex"
-import LokiField from "components/loki_field"
+import tritonField from "components/triton_field"
 export default {
     data () {
         return {
@@ -121,7 +121,7 @@ export default {
         }
     },
     components: {
-        LokiField
+        tritonField
     }
 }
 </script>
@@ -135,7 +135,7 @@ export default {
         }
     }
 
-    .loki-field {
+    .triton-field {
         margin-top: 16px;
     }
 }

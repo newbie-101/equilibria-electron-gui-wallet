@@ -4,7 +4,7 @@
         <main-menu />
         <q-toolbar-title>
             <div class="flex items-center justify-center" style="margin-top:7px">
-                <img src="statics/loki.svg" height="32">
+                <img src="statics/triton.png" height="32">
             </div>
         </q-toolbar-title>
     </q-layout-header>
@@ -75,7 +75,7 @@ const { clipboard } = require("electron")
 import { openURL } from "quasar"
 import { mapState } from "vuex"
 import WalletDetails from "components/wallet_details"
-import FormatLoki from "components/format_loki"
+import Formattriton from "components/format_triton"
 import StatusFooter from "components/footer"
 import MainMenu from "components/mainmenu"
 export default {

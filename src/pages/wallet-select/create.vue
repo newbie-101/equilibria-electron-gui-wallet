@@ -1,7 +1,7 @@
 <template>
 <q-page class="create-wallet">
     <div class="fields q-mx-md q-mt-md">
-        <LokiField label="Wallet name" :error="$v.wallet.name.$error">
+        <tritonField label="Wallet name" :error="$v.wallet.name.$error">
             <q-input
                 v-model="wallet.name"
                 @blur="$v.wallet.name.$touch"
@@ -9,18 +9,18 @@
                 placeholder="A name for your wallet"
                 hide-underline
             />
-        </LokiField>
+        </tritonField>
 
-        <LokiField label="Seed Language">
+        <tritonField label="Seed Language">
             <q-select
                 v-model="wallet.language"
                 :options="languageOptions"
                 :dark="theme=='dark'"
                 hide-underline
             />
-        </LokiField>
+        </tritonField>
 
-        <LokiField label="Password" optional>
+        <tritonField label="Password" optional>
             <q-input
                 v-model="wallet.password"
                 type="password"
@@ -28,16 +28,16 @@
                 placeholder="An optional password for the wallet"
                 hide-underline
             />
-        </LokiField>
+        </tritonField>
 
-        <LokiField label="Confirm Password">
+        <tritonField label="Confirm Password">
             <q-input
                 v-model="wallet.password_confirm"
                 type="password"
                 :dark="theme=='dark'"
                 hide-underline
             />
-        </LokiField>
+        </tritonField>
 
         <q-field>
             <q-btn color="primary" @click="create" label="Create wallet" />
@@ -50,7 +50,7 @@
 <script>
 import { required } from "vuelidate/lib/validators"
 import { mapState } from "vuex"
-import LokiField from "components/loki_field"
+import tritonField from "components/triton_field"
 export default {
     data () {
         return {
@@ -164,7 +164,7 @@ export default {
         }
     },
     components: {
-        LokiField
+        tritonField
     }
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
 <span>
-    {{ value }} LOKI
+    {{ value }} xtri
 </span>
 </template>
 
 <script>
 export default {
-    name: "FormatLoki",
+    name: "Formattriton",
     props: {
         amount: {
             required: true
@@ -19,7 +19,7 @@ export default {
     },
     computed: {
         value () {
-            let value = this.amount / 1e9
+            let value = this.amount / 1e4
             if(this.round)
                 value = value.toFixed(3)
             return value.toLocaleString()

@@ -4,7 +4,7 @@
         <div class="description q-mb-lg">
             Enter the <b>register_service_node</b> command produced by the daemon that is registering to become a Service Node using the "<b>prepare_registration</b>" command
         </div>
-        <LokiField label="Service Node Command" :error="$v.registration_string.$error" :disabled="registration_status.sending">
+        <tritonField label="Service Node Command" :error="$v.registration_string.$error" :disabled="registration_status.sending">
             <q-input
                 v-model="registration_string"
                 type="textarea"
@@ -14,7 +14,7 @@
                 :disabled="registration_status.sending"
                 hide-underline
             />
-        </LokiField>
+        </tritonField>
         <q-field class="q-pt-sm">
             <q-btn color="primary" @click="register()" label="Register service node" :disabled="registration_status.sending"/>
         </q-field>
@@ -30,7 +30,7 @@
 const objectAssignDeep = require("object-assign-deep");
 import { mapState } from "vuex"
 import { required } from "vuelidate/lib/validators"
-import LokiField from "components/loki_field"
+import tritonField from "components/triton_field"
 import WalletPassword from "src/mixins/wallet_password"
 
 export default {
@@ -111,7 +111,7 @@ export default {
     },
     mixins: [WalletPassword],
     components: {
-        LokiField
+        tritonField
     }
 }
 </script>

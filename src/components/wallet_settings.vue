@@ -153,18 +153,18 @@
             </div>
 
             <template v-if="modals.key_image.type == 'Export'">
-                <LokiField class="q-mt-lg" label="Key image export directory" disable-hover>
+                <tritonField class="q-mt-lg" label="Key image export directory" disable-hover>
                     <q-input v-model="modals.key_image.export_path" disable hide-underline />
                     <input type="file" webkitdirectory directory id="keyImageExportPath" v-on:change="setKeyImageExportPath" ref="keyImageExportSelect" hidden />
                     <q-btn color="secondary" v-on:click="selectKeyImageExportPath">Browse</q-btn>
-                </LokiField>
+                </tritonField>
             </template>
             <template v-if="modals.key_image.type == 'Import'">
-                <LokiField class="q-mt-lg" label="Key image import file" disable-hover>
+                <tritonField class="q-mt-lg" label="Key image import file" disable-hover>
                     <q-input v-model="modals.key_image.import_path" disable hide-underline />
                     <input type="file" id="keyImageImportPath" v-on:change="setKeyImageImportPath" ref="keyImageImportSelect" hidden />
                     <q-btn color="secondary" v-on:click="selectKeyImageImportPath">Browse</q-btn>
-                </LokiField>
+                </tritonField>
             </template>
 
             <div class="q-mt-lg text-right">
@@ -218,7 +218,7 @@
 const { clipboard } = require("electron")
 import { mapState } from "vuex"
 import WalletPassword from "src/mixins/wallet_password"
-import LokiField from "components/loki_field"
+import tritonField from "components/triton_field"
 
 export default {
     name: "WalletSettings",
@@ -488,7 +488,7 @@ export default {
     },
     mixins: [WalletPassword],
     components: {
-        LokiField,
+        tritonField,
     }
 }
 </script>
@@ -504,7 +504,7 @@ export default {
         min-width: 600px;
         width: 45vw;
     }
-    .loki-field {
+    .triton-field {
         flex: 1,
     }
 }

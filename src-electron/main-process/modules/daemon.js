@@ -21,18 +21,18 @@ export class Daemon {
     checkVersion () {
         return new Promise((resolve, reject) => {
             if (process.platform === "win32") {
-                let lokid_path = path.join(__ryo_bin, "lokid.exe")
-                let lokid_version_cmd = `"${lokid_path}" --version`
-                if (!fs.existsSync(lokid_path)) { resolve(false) }
-                child_process.exec(lokid_version_cmd, (error, stdout, stderr) => {
+                let tritond_path = path.join(__ryo_bin, "tritond.exe")
+                let tritond_version_cmd = `"${tritond_path}" --version`
+                if (!fs.existsSync(tritond_path)) { resolve(false) }
+                child_process.exec(tritond_version_cmd, (error, stdout, stderr) => {
                     if (error) { resolve(false) }
                     resolve(stdout)
                 })
             } else {
-                let lokid_path = path.join(__ryo_bin, "lokid")
-                let lokid_version_cmd = `"${lokid_path}" --version`
-                if (!fs.existsSync(lokid_path)) { resolve(false) }
-                child_process.exec(lokid_version_cmd, { detached: true }, (error, stdout, stderr) => {
+                let tritond_path = path.join(__ryo_bin, "tritond")
+                let tritond_version_cmd = `"${tritond_path}" --version`
+                if (!fs.existsSync(tritond_path)) { resolve(false) }
+                child_process.exec(tritond_version_cmd, { detached: true }, (error, stdout, stderr) => {
                     if (error) { resolve(false) }
                     resolve(stdout)
                 })
@@ -112,7 +112,7 @@ export class Daemon {
                 args.push("--stagenet")
             }
 
-            args.push("--log-file", path.join(dirs[net_type], "logs", "lokid.log"))
+            args.push("--log-file", path.join(dirs[net_type], "logs", "tritond.log"))
 
             if (daemon.rpc_bind_ip !== "127.0.0.1") { args.push("--confirm-external-bind") }
 
@@ -125,9 +125,9 @@ export class Daemon {
             }
 
             if (process.platform === "win32") {
-                this.daemonProcess = child_process.spawn(path.join(__ryo_bin, "lokid.exe"), args)
+                this.daemonProcess = child_process.spawn(path.join(__ryo_bin, "tritond.exe"), args)
             } else {
-                this.daemonProcess = child_process.spawn(path.join(__ryo_bin, "lokid"), args, {
+                this.daemonProcess = child_process.spawn(path.join(__ryo_bin, "tritond"), args, {
                     detached: true
                 })
             }

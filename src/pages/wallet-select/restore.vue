@@ -1,7 +1,7 @@
 <template>
 <q-page>
     <div class="q-mx-md">
-        <LokiField class="q-mt-md" label="Wallet name" :error="$v.wallet.name.$error">
+        <tritonField class="q-mt-md" label="Wallet name" :error="$v.wallet.name.$error">
             <q-input
                 v-model="wallet.name"
                 placeholder="A name for your wallet"
@@ -9,9 +9,9 @@
                 :dark="theme=='dark'"
                 hide-underline
                 />
-        </LokiField>
+        </tritonField>
 
-        <LokiField class="q-mt-md" label="Mnemonic seed" :error="$v.wallet.seed.$error">
+        <tritonField class="q-mt-md" label="Mnemonic seed" :error="$v.wallet.seed.$error">
             <q-input
                 v-model="wallet.seed"
                 placeholder="25 (or 24) word mnemonic seed"
@@ -20,25 +20,25 @@
                 :dark="theme=='dark'"
                 hide-underline
                 />
-        </LokiField>
+        </tritonField>
 
         <div class="row items-end q-mt-md">
             <div class="col">
-                <LokiField v-if="wallet.refresh_type=='date'" label="Restore from date">
+                <tritonField v-if="wallet.refresh_type=='date'" label="Restore from date">
                     <q-datetime v-model="wallet.refresh_start_date" type="date"
                                 modal :min="1492486495000" :max="Date.now()"
                                 :dark="theme=='dark'"
                                 hide-underline
                                 />
-                </LokiField>
-                <LokiField v-else-if="wallet.refresh_type=='height'" label="Restore from block height" :error="$v.wallet.refresh_start_height.$error">
+                </tritonField>
+                <tritonField v-else-if="wallet.refresh_type=='height'" label="Restore from block height" :error="$v.wallet.refresh_start_height.$error">
                     <q-input v-model="wallet.refresh_start_height" type="number"
                                 min="0"
                                 @blur="$v.wallet.refresh_start_height.$touch"
                                 :dark="theme=='dark'"
                                 hide-underline
                                 />
-                </LokiField>
+                </tritonField>
             </div>
             <div class="col-auto q-ml-sm">
                 <template v-if="wallet.refresh_type=='date'">
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <LokiField class="q-mt-md" label="Password">
+        <tritonField class="q-mt-md" label="Password">
             <q-input
                 v-model="wallet.password"
                 placeholder="An optional password for the wallet"
@@ -68,16 +68,16 @@
                 :dark="theme=='dark'"
                 hide-underline
                 />
-        </LokiField>
+        </tritonField>
 
-        <LokiField class="q-mt-md" label="Confirm Password">
+        <tritonField class="q-mt-md" label="Confirm Password">
             <q-input
                 v-model="wallet.password_confirm"
                 type="password"
                 :dark="theme=='dark'"
                 hide-underline
                 />
-        </LokiField>
+        </tritonField>
 
         <q-field>
             <q-btn color="primary" @click="restore_wallet" label="Restore wallet" />
@@ -90,7 +90,7 @@
 <script>
 import { required, numeric } from "vuelidate/lib/validators"
 import { mapState } from "vuex"
-import LokiField from "components/loki_field"
+import tritonField from "components/triton_field"
 export default {
     data () {
         return {
@@ -203,7 +203,7 @@ export default {
         }
     },
     components: {
-        LokiField
+        tritonField
     }
 }
 </script>

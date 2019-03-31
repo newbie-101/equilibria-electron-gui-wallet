@@ -1,11 +1,11 @@
 {
-  "name": "loki-wallet-atom",
+  "name": "triton-wallet-atom",
   "version": "1.1.1",
   "daemonVersion": "0.3.2.0",
-  "description": "Modern GUI interface for Loki Currency",
-  "productName": "Loki Wallet Atom",
-  "cordovaId": "com.lokinetwork.wallet",
-  "author": "Loki",
+  "description": "Modern GUI interface for Triton Currency",
+  "productName": "Triton Wallet Atom",
+  "cordovaId": "com.tritonnetwork.wallet",
+  "author": "Triton",
   "private": true,
   "scripts": {
     "dev": "quasar dev -m electron -t mat",

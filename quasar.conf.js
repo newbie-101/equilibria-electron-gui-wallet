@@ -174,9 +174,9 @@ module.exports = function (ctx) {
             builder: {
                 // https://www.electron.build/configuration/configuration
 
-                appId: "com.lokinetwork.wallet",
-                productName: "Loki Wallet Atom",
-                copyright: "Copyright © 2018-2019 Loki Project, 2018 Ryo Currency Project",
+                appId: "com.tritonnetwork.wallet",
+                productName: "Triton Wallet Atom",
+                copyright: "Copyright © 2018-2019 Triton Project, 2018 Ryo Currency Project, 2018 Loki Network",
 
                 // directories: {
                 //     buildResources: "src-electron/build"
@@ -194,7 +194,7 @@ module.exports = function (ctx) {
                 },
 
                 dmg: {
-                    background: "src-electron/build/loki-dmg.tiff"
+                    background: "src-electron/build/triton-dmg.tiff"
                 },
 
                 nsis: {

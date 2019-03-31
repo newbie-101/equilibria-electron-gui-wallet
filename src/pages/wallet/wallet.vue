@@ -1,5 +1,5 @@
 /**
-    This is an unused class in LOKI
+    This is an unused class in triton
  */
 
 <template>
@@ -11,7 +11,7 @@
             <div class="infoBox">
                 <div class="infoBoxContent">
                     <div class="text"><span>Balance</span></div>
-                    <div class="value"><span><FormatLoki :amount="info.balance" /></span></div>
+                    <div class="value"><span><Formattriton :amount="info.balance" /></span></div>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <div class="infoBox">
                 <div class="infoBoxContent">
                     <div class="text"><span>Unlocked balance</span></div>
-                    <div class="value"><span><FormatLoki :amount="info.unlocked_balance" /></span></div>
+                    <div class="value"><span><Formattriton :amount="info.unlocked_balance" /></span></div>
                 </div>
             </div>
         </div>
@@ -264,7 +264,7 @@
 const { clipboard } = require("electron")
 import { mapState } from "vuex"
 import AddressHeader from "components/address_header"
-import FormatLoki from "components/format_loki"
+import Formattriton from "components/format_triton"
 import TxList from "components/tx_list"
 export default {
     computed: mapState({
@@ -547,7 +547,7 @@ export default {
         }
     },
     components: {
-        FormatLoki,
+        Formattriton,
         AddressHeader,
         TxList
     },

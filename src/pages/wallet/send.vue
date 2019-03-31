@@ -14,7 +14,7 @@
             <div class="row gutter-md">
                 <!-- Amount -->
                 <div class="col-6">
-                    <LokiField label="Amount" :error="$v.newTx.amount.$error">
+                    <tritonField label="Amount" :error="$v.newTx.amount.$error">
                         <q-input v-model="newTx.amount"
                             :dark="theme=='dark'"
                             type="number"
@@ -25,24 +25,24 @@
                             hide-underline
                         />
                         <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e9" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
-                    </LokiField>
+                    </tritonField>
                 </div>
 
                 <!-- Priority -->
                 <div class="col-6">
-                    <LokiField label="Priority">
+                    <tritonField label="Priority">
                         <q-select :dark="theme=='dark'"
                             v-model="newTx.priority"
                             :options="priorityOptions"
                             hide-underline
                         />
-                    </LokiField>
+                    </tritonField>
                 </div>
             </div>
 
             <!-- Address -->
             <div class="col q-mt-sm">
-                <LokiField label="Address" :error="$v.newTx.address.$error">
+                <tritonField label="Address" :error="$v.newTx.address.$error">
                      <q-input v-model="newTx.address"
                         :dark="theme=='dark'"
                         @blur="$v.newTx.address.$touch"
@@ -50,31 +50,31 @@
                         hide-underline
                     />
                     <q-btn color="secondary" :text-color="theme=='dark'?'white':'dark'" to="addressbook">Contacts</q-btn>
-                </LokiField>
+                </tritonField>
             </div>
 
             <!-- Payment ID -->
             <div class="col q-mt-sm">
-                <LokiField label="Payment id" :error="$v.newTx.payment_id.$error" optional>
+                <tritonField label="Payment id" :error="$v.newTx.payment_id.$error" optional>
                      <q-input v-model="newTx.payment_id"
                         :dark="theme=='dark'"
                         @blur="$v.newTx.payment_id.$touch"
                         placeholder="16 or 64 hexadecimal characters"
                         hide-underline
                     />
-                </LokiField>
+                </tritonField>
             </div>
 
             <!-- Notes -->
             <div class="col q-mt-sm">
-                <LokiField label="Notes" optional>
+                <tritonField label="Notes" optional>
                      <q-input v-model="newTx.note"
                         type="textarea"
                         :dark="theme=='dark'"
                         placeholder="Additional notes to attach to the transaction"
                         hide-underline
                     />
-                </LokiField>
+                </tritonField>
             </div>
 
             <!-- Save to address book -->
@@ -83,14 +83,14 @@
             </q-field>
 
             <div v-if="newTx.address_book.save">
-                <LokiField label="Name" optional>
+                <tritonField label="Name" optional>
                      <q-input v-model="newTx.address_book.name"
                         :dark="theme=='dark'"
                         placeholder="Name that belongs to this address"
                         hide-underline
                     />
-                </LokiField>
-                <LokiField class="q-mt-sm" label="Notes" optional>
+                </tritonField>
+                <tritonField class="q-mt-sm" label="Notes" optional>
                      <q-input v-model="newTx.address_book.description"
                         type="textarea"
                         rows="2"
@@ -98,7 +98,7 @@
                         placeholder="Additional notes"
                         hide-underline
                     />
-                </LokiField>
+                </tritonField>
             </div>
 
             <q-field class="q-pt-sm">
@@ -124,7 +124,7 @@ import { mapState } from "vuex"
 import { required, decimal } from "vuelidate/lib/validators"
 import { payment_id, address, greater_than_zero } from "src/validators/common"
 import Identicon from "components/identicon"
-import LokiField from "components/loki_field"
+import tritonField from "components/triton_field"
 import WalletPassword from "src/mixins/wallet_password"
 const objectAssignDeep = require("object-assign-deep");
 
@@ -318,7 +318,7 @@ export default {
     mixins: [WalletPassword],
     components: {
         Identicon,
-        LokiField
+        tritonField
     }
 }
 </script>

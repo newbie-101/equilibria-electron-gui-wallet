@@ -1,7 +1,7 @@
 <template>
 <div class="service-node-unlock">
      <div class="q-pa-md">
-        <LokiField label="Service Node Key" :error="$v.node_key.$error" :disabled="unlock_status.sending">
+        <tritonField label="Service Node Key" :error="$v.node_key.$error" :disabled="unlock_status.sending">
             <q-input
                 v-model="node_key"
                 :dark="theme=='dark'"
@@ -10,7 +10,7 @@
                 :disabled="unlock_status.sending"
                 hide-underline
             />
-        </LokiField>
+        </tritonField>
         <q-field class="q-pt-sm">
             <q-btn color="primary" @click="unlock()" label="Unlock service node" :disabled="unlock_status.sending"/>
         </q-field>
@@ -27,7 +27,7 @@ const objectAssignDeep = require("object-assign-deep");
 import { mapState } from "vuex"
 import { required } from "vuelidate/lib/validators"
 import { service_node_key } from "src/validators/common"
-import LokiField from "components/loki_field"
+import tritonField from "components/triton_field"
 import WalletPassword from "src/mixins/wallet_password"
 
 export default {
@@ -138,7 +138,7 @@ export default {
 
     mixins: [WalletPassword],
     components: {
-        LokiField
+        tritonField
     }
 }
 </script>

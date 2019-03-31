@@ -25,11 +25,11 @@ export class Backend {
 
     init (config) {
         if (os.platform() === "win32") {
-            this.config_dir = "C:\\ProgramData\\loki"
-            this.wallet_dir = `${os.homedir()}\\Documents\\Loki`
+            this.config_dir = "C:\\ProgramData\\triton"
+            this.wallet_dir = `${os.homedir()}\\Documents\\triton`
         } else {
-            this.config_dir = path.join(os.homedir(), ".loki")
-            this.wallet_dir = path.join(os.homedir(), "Loki")
+            this.config_dir = path.join(os.homedir(), ".triton")
+            this.wallet_dir = path.join(os.homedir(), "triton")
         }
 
         if (!fs.existsSync(this.config_dir)) {
@@ -45,11 +45,11 @@ export class Backend {
         const daemon = {
             type: "remote",
             p2p_bind_ip: "0.0.0.0",
-            p2p_bind_port: 22022,
+            p2p_bind_port: 9230,
             rpc_bind_ip: "127.0.0.1",
-            rpc_bind_port: 22023,
+            rpc_bind_port: 9231,
             zmq_rpc_bind_ip: "127.0.0.1",
-            zmq_rpc_bind_port: 22024,
+            zmq_rpc_bind_port: 9233,
             out_peers: -1,
             in_peers: -1,
             limit_rate_up: -1,
@@ -103,30 +103,6 @@ export class Backend {
         }
 
         this.remotes = [
-            {
-                host: "doopool.xyz",
-                port: "22020"
-            },
-            {
-                host: "daemons.cryptopool.space",
-                port: "22023"
-            },
-            {
-                host: "node.loki-pool.com",
-                port: "18081"
-            },
-            {
-                host: "imaginary.stream",
-                port: "22023"
-            },
-            {
-                host: "nodes.hashvault.pro",
-                port: "22023"
-            },
-            {
-                host: "rpc.nodes.rentals",
-                port: "22023"
-            }
         ]
 
         this.token = config.token
@@ -242,7 +218,7 @@ export class Backend {
 
         case "open_explorer":
             if (params.type == "tx") {
-                require("electron").shell.openExternal("https://lokiblocks.com/tx/" + params.id)
+                require("electron").shell.openExternal("https://explorer.xtri.network/tx/" + params.id)
             }
             break
 

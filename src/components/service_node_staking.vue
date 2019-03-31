@@ -1,28 +1,28 @@
 <template>
 <div class="service-node-staking">
     <div class="q-pa-md">
-        <LokiField label="Service Node Key" :error="$v.service_node.key.$error">
+        <tritonField label="Service Node Key" :error="$v.service_node.key.$error">
             <q-input v-model="service_node.key"
                 :dark="theme=='dark'"
                 @blur="$v.service_node.key.$touch"
                 placeholder="64 hexadecimal characters"
                 hide-underline
             />
-        </LokiField>
+        </tritonField>
 
         <div class="q-mt-md col">
-            <LokiField label="Award Recepient's Address" :error="$v.service_node.award_address.$error">
+            <tritonField label="Award Recepient's Address" :error="$v.service_node.award_address.$error">
                 <q-input v-model="service_node.award_address"
                     :dark="theme=='dark'"
                     @blur="$v.service_node.award_address.$touch"
                     placeholder="64 hexadecimal characters"
                     hide-underline
                 />
-            </LokiField>
+            </tritonField>
             <div class="address-type" :class="[addressType]">( {{ addressType | addressTypeString }} )</div>
         </div>
 
-            <LokiField label="Amount" class="q-mt-md" :error="$v.service_node.amount.$error">
+            <tritonField label="Amount" class="q-mt-md" :error="$v.service_node.amount.$error">
             <q-input v-model="service_node.amount"
                 :dark="theme=='dark'"
                 type="number"
@@ -33,7 +33,7 @@
                 hide-underline
             />
             <q-btn color="secondary" @click="service_node.amount = unlocked_balance / 1e9" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
-        </LokiField>
+        </tritonField>
 
 
 
@@ -57,7 +57,7 @@ const objectAssignDeep = require("object-assign-deep");
 import { mapState } from "vuex"
 import { required, decimal } from "vuelidate/lib/validators"
 import { payment_id, service_node_key, greater_than_zero, address } from "src/validators/common"
-import LokiField from "components/loki_field"
+import tritonField from "components/triton_field"
 import WalletPassword from "src/mixins/wallet_password"
 
 export default {
@@ -256,7 +256,7 @@ export default {
     },
     mixins: [WalletPassword],
     components: {
-        LokiField
+        tritonField
     }
 }
 </script>
