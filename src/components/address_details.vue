@@ -32,7 +32,7 @@
 
                         <div class="infoBox">
                             <div class="infoBoxContent">
-                                <div class="text"><h3>Balance</h3></div>
+                                <div class="text">Balance</div>
                                 <div class="value"><span><Formattriton :amount="address.balance" /></span></div>
                             </div>
                         </div>

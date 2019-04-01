@@ -19,12 +19,12 @@
                             :dark="theme=='dark'"
                             type="number"
                             min="0"
-                            :max="unlocked_balance / 1e9"
+                            :max="unlocked_balance / 1e4"
                             placeholder="0"
                             @blur="$v.newTx.amount.$touch"
                             hide-underline
                         />
-                        <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e9" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
+                        <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e4" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
                     </tritonField>
                 </div>
 
@@ -262,7 +262,7 @@ export default {
                     message: "Amount must be greater than zero"
                 })
                 return
-            } else if(this.newTx.amount > this.unlocked_balance / 1e9) {
+            } else if(this.newTx.amount > this.unlocked_balance / 1e4) {
                 this.$q.notify({
                     type: "negative",
                     timeout: 1000,
