@@ -173,8 +173,6 @@ export default {
                     return "Miner"
                 case "snode":
                     return "Service Node"
-                case "gov":
-                    return "Governance"
                 case "stake":
                     return "Stake"
                 default:
@@ -184,7 +182,7 @@ export default {
     },
     methods: {
         filterTxList () {
-            const all_in = ["in", "pool", "miner", "snode", "gov"]
+            const all_in = ["in", "pool", "miner", "snode"]
             const all_out = ["out", "pending", "stake"]
             const all_pending = ["pending", "pool"]
             this.tx_list_filtered = this.tx_list.filter((tx) => {

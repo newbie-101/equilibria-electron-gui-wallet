@@ -4,7 +4,7 @@
         <main-menu />
         <q-toolbar-title>
             <div class="flex items-center justify-center" style="margin-top:7px">
-                <img src="statics/triton.png" height="32">
+                <img src="statics/triton2.png" height="32">
             </div>
         </q-toolbar-title>
     </q-layout-header>
@@ -37,15 +37,6 @@
                         label="Receive"
                         size="md"
                         icon-right="save_alt"
-                        align="left"
-                    />
-                </router-link>
-                <router-link to="/wallet/servicenode">
-                    <q-btn
-                        class="large-btn"
-                        label="Service node"
-                        size="md"
-                        icon-right="router"
                         align="left"
                     />
                 </router-link>

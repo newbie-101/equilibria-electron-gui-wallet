@@ -13,7 +13,7 @@
 
         <q-toolbar-title v-if="page_title=='triton'">
             <div class="flex items-center justify-center" style="margin-top:7px">
-                <img src="statics/triton.png" height="32">
+              <img src="statics/triton2.png" height="32">
             </div>
         </q-toolbar-title>
         <q-toolbar-title v-else>

@@ -20,7 +20,7 @@
                 </q-item>
                 <q-item v-close-overlay @click.native="exit">
                     <q-item-main>
-                        <q-item-tile label>Exit triton GUI Wallet</q-item-tile>
+                        <q-item-tile label>Exit Triton GUI Wallet</q-item-tile>
                     </q-item-main>
                 </q-item>
             </q-list>

@@ -69,7 +69,7 @@ export default {
                 case 3:
                     this.message = "Starting daemon"
                     this.$refs.backend.className = "solid"
-                    this.$refs.settings.className = "solid"
+                    this.$refs.settings.className = "solid2"
                     this.$refs.daemon.className = "pulse"
                     this.$refs.wallet.className = "grey"
                     break;
@@ -86,16 +86,16 @@ export default {
                 case 6:
                     this.message = "Starting wallet"
                     this.$refs.backend.className = "solid"
-                    this.$refs.settings.className = "solid"
+                    this.$refs.settings.className = "solid2"
                     this.$refs.daemon.className = "solid"
                     this.$refs.wallet.className = "pulse"
                     break;
                 case 7:
                     this.message = "Reading wallet list"
                     this.$refs.backend.className = "solid"
-                    this.$refs.settings.className = "solid"
+                    this.$refs.settings.className = "solid2"
                     this.$refs.daemon.className = "solid"
-                    this.$refs.wallet.className = "solid"
+                    this.$refs.wallet.className = "solid2"
                     break;
             }
         }
