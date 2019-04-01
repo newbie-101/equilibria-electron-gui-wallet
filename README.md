@@ -5,7 +5,7 @@ XTRI is a private cryptocurrency based on Monero. Triton aims to release the fir
 
 More information on the project can be found on the [website](https://xtri.network) and in the [whitepaper](https://cdn.discordapp.com/attachments/475870345010741269/561469142826483712/Triton_whitepaper_v3.1.pdf). Triton is an open source project, and we encourage contributions from anyone with something to offer. 
 <p align="center">
- <img src="https://raw.githubusercontent.com/KeeJef/triton-electron-gui-wallet/master/src-electron/icons/mrcuug.PNG" width="600">
+ <img src="https://pbs.twimg.com/media/D2-ej8HU4AEB2l-.jpg" width="600">
 </p>
 
 
