@@ -1,7 +1,7 @@
 {
   "name": "triton-wallet-atom",
-  "version": "1.0.0",
-  "daemonVersion": "0.3.1.0",
+  "version": "1.0.1",
+  "daemonVersion": "0.3.1.1",
   "description": "Modern GUI interface for Triton Currency",
   "productName": "Triton Wallet Atom",
   "cordovaId": "com.tritonnetwork.wallet",
