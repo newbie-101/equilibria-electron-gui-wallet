@@ -130,9 +130,10 @@
                     flat class="q-mr-sm"
                     @click="hideModal('rescan')"
                     label="Close"
+                    color="red"
                     />
                 <q-btn
-                    color="primary"
+                    color="positive"
                     @click="rescanWallet()"
                     label="Rescan"
                     />
@@ -323,7 +324,8 @@ export default {
                 title: "Copy "+type_human,
                 message: "Be careful who you send your private keys to as they control your funds.",
                 ok: {
-                    label: "OK"
+                    label: "OK",
+                    color: "positive"
                 },
             }).then(() => {
                 this.$q.notify({
@@ -345,7 +347,8 @@ export default {
                 title: "Show private keys",
                 noPasswordMessage: "Do you want to view your private keys?",
                 ok: {
-                    label: "SHOW"
+                    label: "SHOW",
+                    color: "positive"
                 },
             }).then(password => {
                 this.$gateway.send("wallet", "get_private_keys", {password})
@@ -371,12 +374,13 @@ export default {
                     title: "Rescan wallet",
                     message: "Warning: Some information about previous transactions\nsuch as the recipient's address will be lost.",
                     ok: {
-                        label: "RESCAN"
+                        label: "RESCAN",
+                        color: "positive"
                     },
                     cancel: {
                         flat: true,
                         label: "CANCEL",
-                        color: this.theme=="dark"?"white":"dark"
+                        color: "red"
                     }
                 }).then(password => {
                     this.$gateway.send("wallet", "rescan_blockchain")
@@ -457,7 +461,7 @@ export default {
                 cancel: {
                     flat: true,
                     label: "CANCEL",
-                    color: this.theme=="dark"?"white":"dark"
+                    color: "red"
                 }
             }).then(() => {
                 return this.hasPassword()
@@ -477,7 +481,7 @@ export default {
                     cancel: {
                         flat: true,
                         label: "CANCEL",
-                        color: this.theme=="dark"?"white":"dark"
+                        color: "red"
                     }
                 })
             }).then(password => {
@@ -509,4 +513,3 @@ export default {
     }
 }
 </style>
-

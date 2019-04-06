@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-auto">
                         <q-btn
-                            color="primary" style="width:25px;"
+                            color="positive" style="width:25px;"
                             size="sm" icon="file_copy"
                             @click="copyPrivateKey('mnemonic', $event)">
                             <q-tooltip anchor="center left" self="center right" :offset="[5, 10]">
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-auto">
                         <q-btn
-                            color="primary" style="width:25px;"
+                            color="positive" style="width:25px;"
                             size="sm" icon="file_copy"
                             @click="copyPrivateKey('view_key', $event)">
                             <q-tooltip anchor="center left" self="center right" :offset="[5, 10]">
@@ -137,7 +137,7 @@
 
             <div class="q-mt-lg">
                 <q-btn
-                    color="primary"
+                    color="red"
                     @click="hideModal('private_keys')"
                     label="Close"
                     />
@@ -163,9 +163,10 @@
                     flat class="q-mr-sm"
                     @click="hideModal('rescan')"
                     label="Close"
+                    color: "red"
                     />
                 <q-btn
-                    color="primary"
+                    color="positive"
                     @click="rescanWallet()"
                     label="Rescan"
                     />
@@ -249,7 +250,7 @@
                     label="Close"
                     />
                 <q-btn
-                    color="primary"
+                    color="positive"
                     @click="doChangePassword()"
                     label="Change"
                     />
@@ -368,7 +369,8 @@ export default {
                 title: "Copy "+type_human,
                 message: "Be careful who you send your private keys to as they control your funds.",
                 ok: {
-                    label: "OK"
+                    label: "OK",
+                    color: "positive"
                 },
             }).then(() => {
                 this.$q.notify({
@@ -394,12 +396,13 @@ export default {
                     type: "password"
                 },
                 ok: {
-                    label: "SHOW"
+                    label: "SHOW",
+                    color: "positive"
                 },
                 cancel: {
                     flat: true,
                     label: "CANCEL",
-                    color: this.theme=="dark"?"white":"dark"
+                    color: "red"
                 }
             }).then(password => {
                 this.$gateway.send("wallet", "get_private_keys", {password})
@@ -425,12 +428,14 @@ export default {
                     title: "Rescan wallet",
                     message: "Warning: Some information about previous transactions\nsuch as the recipient's address will be lost.",
                     ok: {
-                        label: "RESCAN"
+                        label: "RESCAN",
+                        color: "positive"
+
                     },
                     cancel: {
                         flat: true,
                         label: "CANCEL",
-                        color: this.theme=="dark"?"white":"dark"
+                        color: "red"
                     }
                 }).then(password => {
                     this.$gateway.send("wallet", "rescan_blockchain")
@@ -468,7 +473,7 @@ export default {
                 cancel: {
                     flat: true,
                     label: "CANCEL",
-                    color: this.theme=="dark"?"white":"dark"
+                    color: "red"
                 }
             }).then(password => {
                 if(this.modals.key_image.type == "Export")
@@ -519,7 +524,7 @@ export default {
                 cancel: {
                     flat: true,
                     label: "CANCEL",
-                    color: this.theme=="dark"?"white":"dark"
+                    color: "red"
                 }
             }).then(() => {
                 this.$q.dialog({
@@ -536,7 +541,7 @@ export default {
                     cancel: {
                         flat: true,
                         label: "CANCEL",
-                        color: this.theme=="dark"?"white":"dark"
+                        color: "red"
                     }
                 }).then(password => {
                     this.$gateway.send("wallet", "delete_wallet", {password})

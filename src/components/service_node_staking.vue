@@ -235,7 +235,9 @@ export default {
                 title: "Stake",
                 noPasswordMessage: "Do you want to stake?",
                 ok: {
-                    label: "STAKE"
+                    label: "STAKE",
+                    color: "positive"
+
                 },
             }).then(password => {
                 this.$store.commit("gateway/set_snode_status", {

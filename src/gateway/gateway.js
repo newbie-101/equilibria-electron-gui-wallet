@@ -63,12 +63,13 @@ export class Gateway extends EventEmitter {
             title: restart ? "Restart" : "Exit",
             message: msg,
             ok: {
-                label: restart ? "RESTART" : "EXIT"
+                label: restart ? "RESTART" : "EXIT",
+                color: "positive"
             },
             cancel: {
                 flat: true,
                 label: "CANCEL",
-                color: this.app.store.state.gateway.app.config.appearance.theme == "dark" ? "white" : "dark"
+                color: "red"
             }
         }).then(() => {
             this.closeDialog = false

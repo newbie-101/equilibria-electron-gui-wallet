@@ -23,7 +23,7 @@ export default {
                     cancel: {
                         flat: true,
                         label: "CANCEL",
-                        color: this.theme === "dark" ? "white" : "dark"
+                        color: "red"
                     },
                     ...other,
                     message: hasPassword ? "Enter wallet password to continue." : noPasswordMessage,

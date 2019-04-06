@@ -11,7 +11,7 @@
                 Edit address book entry
             </q-toolbar-title>
 
-            <q-btn v-if="mode=='edit'" flat no-ripple @click="cancelEdit()" label="Cancel" />
+            <q-btn v-if="mode=='edit'" color="red flat no-ripple @click="cancelEdit()" label="Cancel" />
             <q-btn class="q-ml-sm" color="primary" @click="save()" label="Save" />
 
         </q-toolbar>

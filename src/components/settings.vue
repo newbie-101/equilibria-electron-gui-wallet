@@ -108,7 +108,7 @@ export default {
                 cancel: {
                     flat: true,
                     label: "Close",
-                    color: this.theme=="dark"?"white":"dark"
+                    color: "red"
                 }
             }).then(() => {
 
@@ -126,7 +126,7 @@ export default {
                     cancel: {
                         flat: true,
                         label: "CANCEL",
-                        color: this.theme=="dark"?"white":"dark"
+                        color: "red"
                     }
                 }).then(seconds => {
                     this.$gateway.send("daemon", "ban_peer", {host: entry.host, seconds})

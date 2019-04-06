@@ -141,11 +141,12 @@ export default {
                     message: "Are you sure you want to create a wallet with no password?",
                     ok: {
                         label: "YES",
+                        color: "positive"
                     },
                     cancel: {
                         flat: true,
                         label: "CANCEL",
-                        color: this.theme === "dark" ? "white" : "dark"
+                        color: "red"
                     },
                 })
             }

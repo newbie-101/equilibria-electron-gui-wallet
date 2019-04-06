@@ -51,7 +51,7 @@
             </div>
 
             <q-btn
-                color="primary"
+                color="positive"
                 @click="showAbout(false)"
                 label="Close"
                 />
@@ -104,12 +104,14 @@ export default {
                 title: "Switch wallet",
                 message: "Are you sure you want to close the current wallet?",
                 ok: {
-                    label: "OK"
+                    label: "OK",
+                    color: "positive"
+
                 },
                 cancel: {
                     flat: true,
                     label: "CANCEL",
-                    color: this.theme=="dark"?"white":"dark"
+                    color: "red"
                 }
             }).then(() => {
                 this.$router.replace({ path: "/wallet-select" })

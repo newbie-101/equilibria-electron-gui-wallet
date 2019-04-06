@@ -60,15 +60,15 @@ export class Backend {
         const daemons = {
             mainnet: {
                 ...daemon,
-                remote_host: "doopool.xyz",
-                remote_port: 22020
+                remote_host: "sanfran.xtri.network",
+                remote_port: 9231
             },
             stagenet: {
                 ...daemon,
                 type: "local",
-                p2p_bind_port: 38153,
-                rpc_bind_port: 38154,
-                zmq_rpc_bind_port: 38155
+                p2p_bind_port: 9230,
+                rpc_bind_port: 9231,
+                zmq_rpc_bind_port: 9232
             },
             testnet: {
                 ...daemon,
@@ -103,6 +103,12 @@ export class Backend {
         }
 
         this.remotes = [
+          {host: "sanfran.xtri.network",
+          port:9231},
+          {host: "newyork.xtri.network",
+          port:9231},
+          {host: "amsterdam.xtri.network",
+          port:9231},
         ]
 
         this.token = config.token

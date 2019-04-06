@@ -238,7 +238,7 @@ export default {
                 message: JSON.stringify(this.tx, null, 2),
                 ok: {
                     label: "close",
-                    color: "primary",
+                    color: "positive",
                 },
             }).then(() => {
             }).catch(() => {

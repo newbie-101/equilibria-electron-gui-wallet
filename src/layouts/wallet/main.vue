@@ -24,7 +24,7 @@
                 </router-link>
                 <router-link to="/wallet/send">
                     <q-btn
-                        class="large-btn"
+                        class="large-btn primary"
                         label="Send"
                         size="md"
                         icon-right="arrow_right_alt"

@@ -90,7 +90,9 @@ export default {
                 title: "Register service node",
                 noPasswordMessage: "Do you want to register the service node?",
                 ok: {
-                    label: "REGISTER"
+                    label: "REGISTER",
+                    color: "positive"
+
                 },
             }).then(password => {
                 this.$store.commit("gateway/set_snode_status", {

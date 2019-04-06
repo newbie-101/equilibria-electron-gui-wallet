@@ -135,7 +135,9 @@ export default {
                 title: "Copy "+type_human,
                 message: "Be careful who you send your private keys to as they control your funds.",
                 ok: {
-                    label: "OK"
+                    label: "OK",
+                    color: "positive"
+
                 },
             }).then(() => {
                 this.$q.notify({

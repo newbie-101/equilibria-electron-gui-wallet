@@ -105,7 +105,7 @@
                 <q-btn
                     class="send-btn"
                     :disable="!is_able_to_send"
-                    color="primary" @click="send()" label="Send" />
+                    color="positive" @click="send()" label="Send" />
             </q-field>
 
         </div>
@@ -301,7 +301,9 @@ export default {
                 title: "Transfer",
                 noPasswordMessage: "Do you want to send the transaction?",
                 ok: {
-                    label: "SEND"
+                    label: "SEND",
+                    color: "positive"
+
                 },
             }).then(password => {
                 this.$store.commit("gateway/set_tx_status", {

@@ -72,7 +72,8 @@ export default {
                     title: "Copy address",
                     message: "There is a payment id associated with this address.\nBe sure to copy the payment id separately.",
                     ok: {
-                        label: "OK"
+                        label: "OK",
+                        color: "positive"
                     },
                 }).then(() => {
                     this.$q.notify({

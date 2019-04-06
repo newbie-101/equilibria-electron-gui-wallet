@@ -39,7 +39,7 @@
 
                         <div class="infoBox">
                             <div class="infoBoxContent">
-                                <div class="text"><h5>Unlocked balance</h5></div>
+                                <div class="text">Unlocked balance</div>
                                 <div class="value"><span><Formattriton :amount="address.unlocked_balance" /></span></div>
                             </div>
                         </div>

@@ -108,12 +108,13 @@ export default {
                         type: "password"
                     },
                     ok: {
-                        label: "OPEN"
+                        label: "OPEN",
+                        color: "positive"
                     },
                     cancel: {
                         flat: true,
                         label: "CANCEL",
-                        color: this.theme=="dark"?"white":"dark"
+                        color: "red"
                     }
                 }).then(password => {
                     this.$q.loading.show({

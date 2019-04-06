@@ -67,12 +67,14 @@ export default {
                             title: "Confirm",
                             message: this.unlock_status.message,
                             ok: {
-                                label: "UNLOCK"
+                                label: "UNLOCK",
+                                color: "positive"
+
                             },
                             cancel: {
                                 flat: true,
                                 label: "CANCEL",
-                                color: this.theme=="dark"?"white":"dark"
+                                color: "red"
                             }
                         }).then(() => {
                             this.gatewayUnlock(this.password, this.key, true);
@@ -112,7 +114,9 @@ export default {
                 title: "Unlock service node",
                 noPasswordMessage: "Do you want to unlock the service node?",
                 ok: {
-                    label: "UNLOCK"
+                    label: "UNLOCK",
+                    color: "positive"
+
                 },
             }).then(password => {
                 this.password = password
