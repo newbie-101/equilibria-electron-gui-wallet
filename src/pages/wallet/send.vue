@@ -180,9 +180,9 @@ export default {
                 {label: "Fastest", value: 4},
             ],
             currencyOptions: [
-              {lable: "XTRI", value: 0},
-              {label: "USD", value: 1}
-            ]
+              {lable: "xtri", value: 0},
+              {label: "USD", value: 1},
+            ],
         }
     },
     validations: {
