@@ -13,7 +13,7 @@
 
             <div class="row gutter-md">
                 <!-- Amount -->
-                <div class="col-6">
+                <div class="col-4">
                     <tritonField label="Amount" :error="$v.newTx.amount.$error">
                         <q-input v-model="newTx.amount"
                             :dark="theme=='dark'"
@@ -28,8 +28,19 @@
                     </tritonField>
                 </div>
 
+                <!-- Currency -->
+                <div class ="col-4">
+                  <tritonField label="Currency">
+                      <q-select :dark="theme=='dark'"
+                          v-model="newTx.priority"
+                          :options="priorityOptions"
+                          hide-underline
+                      />
+                  </tritonField>
+                </div>
+
                 <!-- Priority -->
-                <div class="col-6">
+                <div class="col-4">
                     <tritonField label="Priority">
                         <q-select :dark="theme=='dark'"
                             v-model="newTx.priority"
@@ -38,6 +49,7 @@
                         />
                     </tritonField>
                 </div>
+
             </div>
 
             <!-- Address -->
