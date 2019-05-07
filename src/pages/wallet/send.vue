@@ -327,6 +327,7 @@ export default {
 
 <style lang="scss">
 .send {
+    text-align: center;
     .send-btn {
         width: 200px;
     }
