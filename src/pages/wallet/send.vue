@@ -33,7 +33,7 @@
                   <tritonField label="Currency">
                       <q-select :dark="theme=='dark'"
                           v-model="newTx.priority"
-                          :options="priorityOptions"
+                          :options="currencyOptions"
                           hide-underline
                       />
                   </tritonField>
@@ -179,6 +179,10 @@ export default {
                 {label: "Fast", value: 3},
                 {label: "Fastest", value: 4},
             ],
+            currencyOptions: [
+              {lable: "XTRI", value: 0},
+              {label: "USD", value: 1}
+            ]
         }
     },
     validations: {
