@@ -32,7 +32,7 @@
                 <div class ="col-4">
                   <tritonField label="Currency">
                       <q-select :dark="theme=='dark'"
-                          v-model="newTx.priority"
+                          v-model="newTx.currency"
                           :options="currencyOptions"
                           hide-underline
                       />
@@ -180,8 +180,11 @@ export default {
                 {label: "Fastest", value: 4},
             ],
             currencyOptions: [
-              {lable: "xtri", value: 0},
+              {label: "xtri", value: 0},
               {label: "USD", value: 1},
+              {label: "EUR", value: 2},
+              {label: "CAD", value: 3},
+              {label: "JPY", value: 4},
             ],
         }
     },
