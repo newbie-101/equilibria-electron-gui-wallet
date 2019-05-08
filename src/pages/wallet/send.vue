@@ -10,7 +10,6 @@
     <template v-else>
 
         <div class="q-pa-md">
-
             <div class="row gutter-md">
                 <!-- Amount -->
                 <div class="col-4">
@@ -50,6 +49,24 @@
                     </tritonField>
                 </div>
 
+            </div>
+
+            <!-- amount in xtri -->
+            <div class="row gutter-md">
+              <div class="col-4">
+                  <tritonField label="Amount in xtri" :error="$v.newTx.amount.$error">
+                      <q-input v-model="newTx.amount"
+                          :dark="theme=='dark'"
+                          type="number"
+                          min="0"
+                          :max="unlocked_balance / 1e4"
+                          placeholder="0"
+                          @blur="$v.newTx.amount.$touch"
+                          suffix="xtri"
+                          hide-underline
+                      />
+                  </tritonField>
+              </div>
             </div>
 
             <!-- Address -->
@@ -180,7 +197,7 @@ export default {
                 {label: "Fastest", value: 4},
             ],
             currencyOptions: [
-              {label: "xtri", value: 0},
+              {label: "XTRI", value: 0},
               {label: "USD", value: 1},
               {label: "EUR", value: 2},
               {label: "CAD", value: 3},
