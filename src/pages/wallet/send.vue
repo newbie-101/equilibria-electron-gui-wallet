@@ -301,43 +301,33 @@ export default {
             this.newTx.payment_id = info.payment_id
         },
         // Conversion Function------------------------------------------------------------
+
         conversion: function () {
             //xtri price in sats variable
-            let sats;
+            let sats
             //btc prices in differnt currencies
-            let usdPrice;
+            let usdPrice = 6342.4;
 
                 //getting xtri price in sats
                 axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
-                        console.log(res.data.price);
-                        sats = res.data.price;
-                    });
+                    console.log(res.data.price);
+                    sats = res.data.price;
 
+                    this.newTx.amountConverted = sats;
 
-                function axiosTest() {
-                    return axios.get(url).then(response => {
-                        // returning the data here allows the caller to get it through another .then(...)
-                        return response.data
-                        })
+                    if(this.newTx.currency == 0){//XTRI currency
+                        this.newTx.amountConverted = this.newTx.amount;
+                        return 1;
                     }
-
-axiosTest().then(data => {
-  response.json({ message: 'Request received!', data })
-})
-
-            this.newTx.amountConverted = sats;
-
-            console.log(sats);
-
-          if(this.newTx.currency == 0){//XTRI currency
-            this.newTx.amountConverted = this.newTx.amount;
-          }
-          else if(this.newTx.currency == 1){//USD currency
-            this.newTx.amountConverted = usdPrice*sats;
-          }
-          else {
+                    else if(this.newTx.currency == 1){//USD currency
+                        this.newTx.amountConverted = (this.newTx.amount/usdPrice)/sats;
+                        return 1;
+                    }        
+                    else {
+                        return 1;
+                    }
+                });
             return 1;
-          }
         },
 
         send: function () {
