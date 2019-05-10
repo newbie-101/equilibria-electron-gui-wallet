@@ -22,8 +22,9 @@
                             placeholder="0"
                             @blur="$v.newTx.amount.$touch"
                             hide-underline
+                            @input="conversion()"
                         />
-                        <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e4" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
+                        <q-btn color="secondary" @click="conversion()" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
                     </tritonField>
                 </div>
 
@@ -55,10 +56,11 @@
             <div class="row gutter-md">
               <div class="col-4">
                   <tritonField label="Amount in xtri" :error="$v.newTx.amount.$error">
-                      <q-input v-model="newTx.amount * conversion()"
+                      <q-input v-model="newTx.amountConverted"
                           :dark="theme=='dark'"
                           type="number"
                           min="0"
+                          :disable="true"
                           :max="unlocked_balance / 1e4"
                           placeholder="0"
                           @blur="$v.newTx.amount.$touch"
@@ -149,6 +151,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { mapState } from "vuex"
 import { required, decimal } from "vuelidate/lib/validators"
 import { payment_id, address, greater_than_zero } from "src/validators/common"
@@ -298,12 +301,39 @@ export default {
             this.newTx.payment_id = info.payment_id
         },
         // Conversion Function------------------------------------------------------------
-        conversion: function (){
-          if(this.newTx.currency == 0){
-            return 1;
+        conversion: function () {
+            //xtri price in sats variable
+            let sats;
+            //btc prices in differnt currencies
+            let usdPrice;
+
+                //getting xtri price in sats
+                axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
+                        console.log(res.data.price);
+                        sats = res.data.price;
+                    });
+
+
+                function axiosTest() {
+                    return axios.get(url).then(response => {
+                        // returning the data here allows the caller to get it through another .then(...)
+                        return response.data
+                        })
+                    }
+
+axiosTest().then(data => {
+  response.json({ message: 'Request received!', data })
+})
+
+            this.newTx.amountConverted = sats;
+
+            console.log(sats);
+
+          if(this.newTx.currency == 0){//XTRI currency
+            this.newTx.amountConverted = this.newTx.amount;
           }
-          else if(this.newTx.currency == 1){
-            return 31;
+          else if(this.newTx.currency == 1){//USD currency
+            this.newTx.amountConverted = usdPrice*sats;
           }
           else {
             return 1;
@@ -312,6 +342,7 @@ export default {
 
         send: function () {
             this.$v.newTx.$touch()
+            //this.newTx.amount = this.newTx.amount * conversion();
 
             if(this.newTx.amount < 0) {
                 this.$q.notify({
