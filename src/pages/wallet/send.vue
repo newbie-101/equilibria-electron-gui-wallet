@@ -51,11 +51,11 @@
 
             </div>
 
-            <!-- amount in xtri -->
+            <!-- amount in xtri-->
             <div class="row gutter-md">
               <div class="col-4">
                   <tritonField label="Amount in xtri" :error="$v.newTx.amount.$error">
-                      <q-input v-model="newTx.amount"
+                      <q-input v-model="newTx.amount * conversion()"
                           :dark="theme=='dark'"
                           type="number"
                           min="0"
@@ -183,6 +183,7 @@ export default {
                 address: "",
                 payment_id: "",
                 currency: 0,
+                currencyConverted: 0,
                 priority: 0,
                 address_book: {
                     save: false,
@@ -203,6 +204,22 @@ export default {
               {label: "EUR", value: 2},
               {label: "CAD", value: 3},
               {label: "JPY", value: 4},
+              {label: "a", value: 5},
+              {label: "b", value: 6},
+              {label: "c", value: 7},
+              {label: "d", value: 8},
+              {label: "e", value: 9},
+              {label: "f", value: 10},
+              {label: "g", value: 11},
+              {label: "h", value: 12},
+              {label: "i", value: 13},
+              {label: "j", value: 14},
+              {label: "k", value: 15},
+              {label: "l", value: 16},
+              {label: "m", value: 17},
+              {label: "n", value: 18},
+              {label: "o", value: 19},
+              {label: "p", value: 20},
             ],
         }
     },
@@ -280,6 +297,18 @@ export default {
         autoFill: function (info) {
             this.newTx.address = info.address
             this.newTx.payment_id = info.payment_id
+        },
+        // Conversion Function------------------------------------------------------------
+        conversion: function (){
+          if(this.newTx.currency == 0){
+            return 1;
+          }
+          else if(this.newTx.currency == 1){
+            return 31;
+          }
+          else {
+            return 1;
+          }
         },
 
         send: function () {
@@ -360,6 +389,7 @@ export default {
         tritonField
     }
 }
+
 </script>
 
 <style lang="scss">
