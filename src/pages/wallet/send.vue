@@ -183,7 +183,6 @@ export default {
                 address: "",
                 payment_id: "",
                 currency: 0,
-                currencyConverted: 0,
                 priority: 0,
                 address_book: {
                     save: false,
