@@ -22,7 +22,7 @@
                             placeholder="0"
                             @blur="$v.newTx.amount.$touch"
                             hide-underline
-                            @input="conversion()"
+                            @change="conversion()"
                         />
                         <q-btn color="secondary" @click="conversion()" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
                     </tritonField>
@@ -35,6 +35,7 @@
                           v-model="newTx.currency"
                           :options="currencyOptions"
                           hide-underline
+                          @change="conversion()"
                       />
                   </tritonField>
                 </div>
@@ -303,29 +304,46 @@ export default {
         // Conversion Function------------------------------------------------------------
 
         conversion: function () {
+            //Returns if not doing any conversions
+            if(this.newTx.currency == 0){//XTRI currency
+                this.newTx.amountConverted = this.newTx.amount;
+                    return 1;
+                }
             //xtri price in sats variable
             let sats
             //btc prices in differnt currencies
-            let usdPrice = 6342.4;
+            let usdPrice;
 
                 //getting xtri price in sats
                 axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
                     console.log(res.data.price);
                     sats = res.data.price;
 
-                    this.newTx.amountConverted = sats;
+                    //getting btc price in usd
 
-                    if(this.newTx.currency == 0){//XTRI currency
+                    axios.get(`https://blockchain.info/ticker`).then(res => {
+                        console.log(res.data.USD["15m"])
+                        
+                        //btc prices in difffernt gov currencys
+                        usdPrice = res.data.USD["15m"];
+
+
+                        //calculations for desired currency to xtri
+                        if(this.newTx.currency == 0){//XTRI currency
                         this.newTx.amountConverted = this.newTx.amount;
-                        return 1;
-                    }
-                    else if(this.newTx.currency == 1){//USD currency
+                            return 1;
+                        }
+                        else if(this.newTx.currency == 1){//USD currency
                         this.newTx.amountConverted = (this.newTx.amount/usdPrice)/sats;
-                        return 1;
-                    }        
-                    else {
-                        return 1;
-                    }
+                        }        
+                        else {
+                            return 1;
+                        }
+                    })
+
+                    
+
+                    
                 });
             return 1;
         },
