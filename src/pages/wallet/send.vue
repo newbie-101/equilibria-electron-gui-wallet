@@ -13,9 +13,9 @@
             <div class="row gutter-md">
                 <!-- Amount -->
                 <div class="col-4">
-                    <tritonField label="Amount" :error="$v.newTx.amount.$error">
+                    <tritonField label="Amount">
                         <q-input 
-                            v-model="newTx.amount"
+                            v-model="newTx.amountInCurrency"
                             :dark="theme=='dark'"
                             type="number"
                             min="0"
@@ -56,8 +56,8 @@
             <!-- amount in xtri-->
             <div class="row gutter-md">
               <div class="col-4">
-                  <tritonField label="Amount in xtri">
-                      <q-input v-model="newTx.amountXtri"
+                  <tritonField label="Amount in xtri" :error="$v.newTx.amount.$error">
+                      <q-input v-model="newTx.amount"
                           :dark="theme=='dark'"
                           type="number"
                           min="0"
@@ -67,7 +67,7 @@
                           hide-underline
                           @change.native="conversionFromXtri()"
                       />
-                      <q-btn color="secondary" @click="newTx.amountXtri = unlocked_balance / 1e4; conversionFromXtri()" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
+                      <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e4; conversionFromXtri()" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
                   </tritonField>
               </div>
             </div>
@@ -311,13 +311,12 @@ export default {
             //btc prices in differnt currencies
             let usdPrice;
 
-                //getting xtri price in sats
+                //getting xtri price in sats--start of promise chain
                 axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
                     console.log(res.data.price);
                     sats = res.data.price;
 
-                    //getting btc price in usd
-
+                    //getting btc price in usd---Nested promise chain
                     axios.get(`https://blockchain.info/ticker`).then(res => {
                         console.log(res.data.USD["15m"])
                         
@@ -327,11 +326,8 @@ export default {
 
                         //calculations for desired currency to xtri
                         if(this.newTx.currency == 1){//USD currency
-                        this.newTx.amountXtri = ((this.newTx.amount/usdPrice)/sats).toFixed(4);
+                        this.newTx.amount = ((this.newTx.amountInCurrency/usdPrice)/sats).toFixed(4);
                         }        
-                        else {
-                            return 2;
-                        }
                     })
                 });
             return 1;
@@ -359,7 +355,7 @@ export default {
 
                         //calculations for desired currency to xtri
                         if(this.newTx.currency == 1){//USD currency
-                        this.newTx.amount = ((this.newTx.amountXtri*usdPrice)*sats).toFixed(4);
+                        this.newTx.amountInCurrency = ((this.newTx.amount*usdPrice)*sats).toFixed(4);
                         }        
                         else {
                             return 1;
@@ -371,7 +367,6 @@ export default {
 
         send: function () {
             this.$v.newTx.$touch()
-            this.newTx.amount = this.newTx.amountXtri;
 
             if(this.newTx.amount < 0) {
                 this.$q.notify({
