@@ -14,7 +14,8 @@
                 <!-- Amount -->
                 <div class="col-4">
                     <tritonField label="Amount" :error="$v.newTx.amount.$error">
-                        <q-input v-model="newTx.amount"
+                        <q-input 
+                            v-model="newTx.amount"
                             :dark="theme=='dark'"
                             type="number"
                             min="0"
@@ -22,9 +23,9 @@
                             placeholder="0"
                             @blur="$v.newTx.amount.$touch"
                             hide-underline
-                            @change="conversion()"
+                            @change.native="conversion()"
                         />
-                        <q-btn color="secondary" @click="conversion()" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
+                        <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e4; newTx.currency = 0" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
                     </tritonField>
                 </div>
 
@@ -35,7 +36,7 @@
                           v-model="newTx.currency"
                           :options="currencyOptions"
                           hide-underline
-                          @change="conversion()"
+                          @input="conversion()"
                       />
                   </tritonField>
                 </div>
@@ -56,12 +57,12 @@
             <!-- amount in xtri-->
             <div class="row gutter-md">
               <div class="col-4">
-                  <tritonField label="Amount in xtri" :error="$v.newTx.amount.$error">
+                  <tritonField label="Amount in xtri">
                       <q-input v-model="newTx.amountConverted"
                           :dark="theme=='dark'"
                           type="number"
                           min="0"
-                          :disable="true"
+                          
                           :max="unlocked_balance / 1e4"
                           placeholder="0"
                           @blur="$v.newTx.amount.$touch"
@@ -186,7 +187,6 @@ export default {
                 amount: 0,
                 address: "",
                 payment_id: "",
-                currency: 0,
                 priority: 0,
                 address_book: {
                     save: false,
@@ -306,8 +306,8 @@ export default {
         conversion: function () {
             //Returns if not doing any conversions
             if(this.newTx.currency == 0){//XTRI currency
-                this.newTx.amountConverted = this.newTx.amount;
-                    return 1;
+                 this.newTx.amountConverted  = this.newTx.amount;
+                    return 2;
                 }
             //xtri price in sats variable
             let sats
@@ -330,14 +330,14 @@ export default {
 
                         //calculations for desired currency to xtri
                         if(this.newTx.currency == 0){//XTRI currency
-                        this.newTx.amountConverted = this.newTx.amount;
-                            return 1;
+                            this.newTx.amountConverted  = this.newTx.amount;
+                            return 2;
                         }
                         else if(this.newTx.currency == 1){//USD currency
-                        this.newTx.amountConverted = (this.newTx.amount/usdPrice)/sats;
+                        this.newTx.amountConverted = ((this.newTx.amount/usdPrice)/sats).toFixed(4);
                         }        
                         else {
-                            return 1;
+                            return 2;
                         }
                     })
 
@@ -350,7 +350,7 @@ export default {
 
         send: function () {
             this.$v.newTx.$touch()
-            //this.newTx.amount = this.newTx.amount * conversion();
+            this.newTx.amount = this.newTx.amountConverted;
 
             if(this.newTx.amount < 0) {
                 this.$q.notify({
