@@ -23,9 +23,8 @@
                             placeholder="0"
                             @blur="$v.newTx.amount.$touch"
                             hide-underline
-                            @change.native="conversion()"
+                            @change.native="conversionToXtri()"
                         />
-                        <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e4; newTx.currency = 0" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
                     </tritonField>
                 </div>
 
@@ -36,7 +35,7 @@
                           v-model="newTx.currency"
                           :options="currencyOptions"
                           hide-underline
-                          @input="conversion()"
+                          @input="conversionToXtri()"
                       />
                   </tritonField>
                 </div>
@@ -58,17 +57,17 @@
             <div class="row gutter-md">
               <div class="col-4">
                   <tritonField label="Amount in xtri">
-                      <q-input v-model="newTx.amountConverted"
+                      <q-input v-model="newTx.amountXtri"
                           :dark="theme=='dark'"
                           type="number"
                           min="0"
-                          
                           :max="unlocked_balance / 1e4"
                           placeholder="0"
                           @blur="$v.newTx.amount.$touch"
-                          suffix="xtri"
                           hide-underline
+                          @change.native="conversionFromXtri()"
                       />
+                      <q-btn color="secondary" @click="newTx.amountXtri = unlocked_balance / 1e4; conversionFromXtri()" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
                   </tritonField>
               </div>
             </div>
@@ -180,6 +179,8 @@ export default {
             return `${prefix}..`;
         }
     }),
+
+
     data () {
         return {
             sending: false,
@@ -188,6 +189,7 @@ export default {
                 address: "",
                 payment_id: "",
                 priority: 0,
+                currency: 1,
                 address_book: {
                     save: false,
                     name: "",
@@ -202,7 +204,6 @@ export default {
                 {label: "Fastest", value: 4},
             ],
             currencyOptions: [
-              {label: "XTRI", value: 0},
               {label: "USD", value: 1},
               {label: "EUR", value: 2},
               {label: "CAD", value: 3},
@@ -303,12 +304,8 @@ export default {
         },
         // Conversion Function------------------------------------------------------------
 
-        conversion: function () {
-            //Returns if not doing any conversions
-            if(this.newTx.currency == 0){//XTRI currency
-                 this.newTx.amountConverted  = this.newTx.amount;
-                    return 2;
-                }
+        //FROM WHAT EVER CURRENCY TO XTRI
+        conversionToXtri: function () {
             //xtri price in sats variable
             let sats
             //btc prices in differnt currencies
@@ -329,28 +326,52 @@ export default {
 
 
                         //calculations for desired currency to xtri
-                        if(this.newTx.currency == 0){//XTRI currency
-                            this.newTx.amountConverted  = this.newTx.amount;
-                            return 2;
-                        }
-                        else if(this.newTx.currency == 1){//USD currency
-                        this.newTx.amountConverted = ((this.newTx.amount/usdPrice)/sats).toFixed(4);
+                        if(this.newTx.currency == 1){//USD currency
+                        this.newTx.amountXtri = ((this.newTx.amount/usdPrice)/sats).toFixed(4);
                         }        
                         else {
                             return 2;
                         }
                     })
+                });
+            return 1;
+        },
+        //FROM XTRI TO WHAT EVER CURRENCY
+        conversionFromXtri: function () {
+            //xtri price in sats variable
+            let sats
+            //btc prices in differnt currencies
+            let usdPrice;
 
-                    
+                //getting xtri price in sats
+                axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
+                    console.log(res.data.price);
+                    sats = res.data.price;
 
-                    
+                    //getting btc price in usd
+
+                    axios.get(`https://blockchain.info/ticker`).then(res => {
+                        console.log(res.data.USD["15m"])
+                        
+                        //btc prices in difffernt gov currencys
+                        usdPrice = res.data.USD["15m"];
+
+
+                        //calculations for desired currency to xtri
+                        if(this.newTx.currency == 1){//USD currency
+                        this.newTx.amount = ((this.newTx.amountXtri*usdPrice)*sats).toFixed(4);
+                        }        
+                        else {
+                            return 1;
+                        }
+                    })
                 });
             return 1;
         },
 
         send: function () {
             this.$v.newTx.$touch()
-            this.newTx.amount = this.newTx.amountConverted;
+            this.newTx.amount = this.newTx.amountXtri;
 
             if(this.newTx.amount < 0) {
                 this.$q.notify({
