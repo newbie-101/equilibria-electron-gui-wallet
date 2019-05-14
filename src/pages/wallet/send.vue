@@ -25,6 +25,7 @@
                             hide-underline
                             @change.native="conversionToXtri()"
                         />
+                        <q-spinner v-modle="newTx.topSpinner" v-if="newTx.topSpinner == 1"/>
                     </tritonField>
                 </div>
 
@@ -67,8 +68,11 @@
                           hide-underline
                           @change.native="conversionFromXtri()"
                       />
+                    
+                      <q-spinner v-modle="newTx.botSpinner" v-if="newTx.botSpinner == 1"/>
                       <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e4; conversionFromXtri()" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
                   </tritonField>
+                  
               </div>
             </div>
 
@@ -315,6 +319,8 @@ export default {
                 axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
                     console.log(res.data.price);
                     sats = res.data.price;
+                    
+                    this.newTx.botSpinner = 1;//start spinner
 
                     //getting btc price in usd---Nested promise chain
                     axios.get(`https://blockchain.info/ticker`).then(res => {
@@ -323,6 +329,7 @@ export default {
                         //btc prices in difffernt gov currencys
                         usdPrice = res.data.USD["15m"];
 
+                        this.newTx.botSpinner = 0;//stop spinner
 
                         //calculations for desired currency to xtri
                         if(this.newTx.currency == 1){//USD currency
@@ -330,38 +337,38 @@ export default {
                         }        
                     })
                 });
+            
             return 1;
         },
         //FROM XTRI TO WHAT EVER CURRENCY
         conversionFromXtri: function () {
             //xtri price in sats variable
-            let sats
+            let sats;
             //btc prices in differnt currencies
             let usdPrice;
 
-                //getting xtri price in sats
-                axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
-                    console.log(res.data.price);
-                    sats = res.data.price;
+                    //getting xtri price in sats from Trade Ogre
+                    axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
+                        console.log(res.data.price);
+                        sats = res.data.price;
 
-                    //getting btc price in usd
+                        this.newTx.topSpinner = 1;//start spinner
 
-                    axios.get(`https://blockchain.info/ticker`).then(res => {
-                        console.log(res.data.USD["15m"])
-                        
-                        //btc prices in difffernt gov currencys
-                        usdPrice = res.data.USD["15m"];
+                        //getting btc price in usd
+                        axios.get(`https://blockchain.info/ticker`).then(res => {
+                            console.log(res.data.USD["15m"])
+                            
+                            //btc prices in difffernt gov currencys
+                            usdPrice = res.data.USD["15m"];
 
+                            this.newTx.topSpinner = 0;//stop spinner
 
-                        //calculations for desired currency to xtri
-                        if(this.newTx.currency == 1){//USD currency
-                        this.newTx.amountInCurrency = ((this.newTx.amount*usdPrice)*sats).toFixed(4);
-                        }        
-                        else {
-                            return 1;
-                        }
-                    })
-                });
+                            //calculations for desired currency to xtri
+                            if(this.newTx.currency == 1){//USD currency
+                            this.newTx.amountInCurrency = ((this.newTx.amount*usdPrice)*sats).toFixed(4);
+                            }        
+                        })
+                    });      
             return 1;
         },
 
