@@ -190,7 +190,7 @@ export default {
                 address: "",
                 payment_id: "",
                 priority: 0,
-                currency: 1,
+                currency: 0,
                 address_book: {
                     save: false,
                     name: "",
@@ -205,26 +205,28 @@ export default {
                 {label: "Fastest", value: 4},
             ],
             currencyOptions: [
-              {label: "USD", value: 1},
-              {label: "EUR", value: 2},
+              {label: "USD", value: 0},
+              {label: "AUD", value: 1},
+              {label: "BRL", value: 2},
               {label: "CAD", value: 3},
-              {label: "JPY", value: 4},
-              {label: "a", value: 5},
-              {label: "b", value: 6},
-              {label: "c", value: 7},
-              {label: "d", value: 8},
-              {label: "e", value: 9},
-              {label: "f", value: 10},
-              {label: "g", value: 11},
-              {label: "h", value: 12},
-              {label: "i", value: 13},
-              {label: "j", value: 14},
-              {label: "k", value: 15},
-              {label: "l", value: 16},
-              {label: "m", value: 17},
-              {label: "n", value: 18},
-              {label: "o", value: 19},
-              {label: "p", value: 20},
+              {label: "CHF", value: 4},
+              {label: "CLP", value: 5},
+              {label: "CNY", value: 6},
+              {label: "DKK", value: 7},
+              {label: "EUR", value: 8},
+              {label: "GBP", value: 9},
+              {label: "HKD", value: 10},
+              {label: "INR", value: 11},
+              {label: "ISK", value: 12},
+              {label: "JPY", value: 13},
+              {label: "KRW", value: 14},
+              {label: "NZD", value: 15},
+              {label: "PLN", value: 16},
+              {label: "RUB", value: 17},
+              {label: "SEK", value: 18},
+              {label: "SGD", value: 19},
+              {label: "THB", value: 20},
+              {label: "TWD", value: 21},
             ],
         }
     },
@@ -308,28 +310,46 @@ export default {
         //FROM WHAT EVER CURRENCY TO XTRI
         conversionToXtri: function () {
             //xtri price in sats variable
-            let sats
+            let sats;
             //btc prices in differnt currencies
-            let usdPrice;
+            let currentPrice;
+            let prices=[];
 
-                //getting xtri price in sats--start of promise chain
-                axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
-                    console.log(res.data.price);
-                    sats = res.data.price;
+            //getting xtri price in sats from Trade Ogre
+            axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
+                console.log(res.data.price);
+                sats = res.data.price;
+                
+                //getting btc price in usd
+                axios.get(`https://blockchain.info/ticker`).then(res => {
+                    //btc prices in difffernt gov currencys
+                    prices[0] = res.data.USD["15m"];
+                    prices[1] = res.data.AUD["15m"];
+                    prices[2] = res.data.BRL["15m"];
+                    prices[3] = res.data.CAD["15m"];
+                    prices[4] = res.data.CHF["15m"];
+                    prices[5] = res.data.CLP["15m"];
+                    prices[6] = res.data.CNY["15m"];
+                    prices[7] = res.data.DKK["15m"];
+                    prices[8] = res.data.EUR["15m"];
+                    prices[9] = res.data.GBP["15m"];
+                    prices[10] = res.data.HKD["15m"];
+                    prices[11] = res.data.INR["15m"];
+                    prices[12] = res.data.ISK["15m"];
+                    prices[13] = res.data.JPY["15m"];
+                    prices[14] = res.data.KRW["15m"];
+                    prices[15] = res.data.NZD["15m"];
+                    prices[16] = res.data.PLN["15m"];
+                    prices[17] = res.data.RUB["15m"];
+                    prices[18] = res.data.SEK["15m"];
+                    prices[19] = res.data.SGD["15m"];
+                    prices[20] = res.data.THB["15m"];
+                    prices[21] = res.data.TWD["15m"];
                     
-                    
+                    currentPrice = prices[this.newTx.currency];
 
-                    //getting btc price in usd---Nested promise chain
-                    axios.get(`https://blockchain.info/ticker`).then(res => {
-                        console.log(res.data.USD["15m"])
-                        
-                        //btc prices in difffernt gov currencys
-                        usdPrice = res.data.USD["15m"];
-
-                        //calculations for desired currency to xtri
-                        if(this.newTx.currency == 1){//USD currency
-                        this.newTx.amount = ((this.newTx.amountInCurrency/usdPrice)/sats).toFixed(4);
-                        }        
+                    //Do conversion with current currency
+                    this.newTx.amount = ((this.newTx.amountInCurrency/currentPrice)/sats).toFixed(4);       
                     })
                 });
             
@@ -340,28 +360,47 @@ export default {
             //xtri price in sats variable
             let sats;
             //btc prices in differnt currencies
-            let usdPrice;
+            let currentPrice;
+            let prices=[];
 
-                    //getting xtri price in sats from Trade Ogre
-                    axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
-                        console.log(res.data.price);
-                        sats = res.data.price;
-                         //this.newTx.topSpinner = 1;//start spinner
-                        
+            //getting xtri price in sats from Trade Ogre
+            axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
+                console.log(res.data.price);
+                sats = res.data.price;
+                
+                //getting btc price in usd
+                axios.get(`https://blockchain.info/ticker`).then(res => {
+                    //btc prices in difffernt gov currencys
+                    prices[0] = res.data.USD["15m"];
+                    prices[1] = res.data.AUD["15m"];
+                    prices[2] = res.data.BRL["15m"];
+                    prices[3] = res.data.CAD["15m"];
+                    prices[4] = res.data.CHF["15m"];
+                    prices[5] = res.data.CLP["15m"];
+                    prices[6] = res.data.CNY["15m"];
+                    prices[7] = res.data.DKK["15m"];
+                    prices[8] = res.data.EUR["15m"];
+                    prices[9] = res.data.GBP["15m"];
+                    prices[10] = res.data.HKD["15m"];
+                    prices[11] = res.data.INR["15m"];
+                    prices[12] = res.data.ISK["15m"];
+                    prices[13] = res.data.JPY["15m"];
+                    prices[14] = res.data.KRW["15m"];
+                    prices[15] = res.data.NZD["15m"];
+                    prices[16] = res.data.PLN["15m"];
+                    prices[17] = res.data.RUB["15m"];
+                    prices[18] = res.data.SEK["15m"];
+                    prices[19] = res.data.SGD["15m"];
+                    prices[20] = res.data.THB["15m"];
+                    prices[21] = res.data.TWD["15m"];
+                    
+                    currentPrice = prices[this.newTx.currency];
+                    
+                    //Do conversion with current currency
+                    this.newTx.amountInCurrency = ((this.newTx.amount*currentPrice)*sats).toFixed(4);
+                })
+            });
 
-                        //getting btc price in usd
-                        axios.get(`https://blockchain.info/ticker`).then(res => {
-                            console.log(res.data.USD["15m"])
-                            
-                            //btc prices in difffernt gov currencys
-                            usdPrice = res.data.USD["15m"];
-
-                            //calculations for desired currency to xtri
-                            if(this.newTx.currency == 1){//USD currency
-                            this.newTx.amountInCurrency = ((this.newTx.amount*usdPrice)*sats).toFixed(4);
-                            }        
-                        })
-                    });
             return 1;
         },
 
