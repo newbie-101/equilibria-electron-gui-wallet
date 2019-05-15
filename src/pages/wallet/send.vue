@@ -138,7 +138,7 @@
                 <q-btn
                     class="send-btn"
                     :disable="!is_able_to_send"
-                    color="positive" @click="send()" label="Send" />
+                    color="positive" @click="openedSend = true" label="Send" />
             </q-field>
 
         </div>
@@ -147,8 +147,30 @@
             <q-spinner color="primary" :size="30" />
         </q-inner-loading>
 
-    </template>
+         <q-modal v-model="openedSend" minimized content-css="padding: 0 2rem 2rem 2rem" class="confirmBtn">
+            <h5>CONFIRM AMOUNT</h5>
+            <tritonField :error="$v.newTx.amount.$error">
+                      <q-input v-model="newTx.amount"
+                          :dark="theme=='dark'"
+                          type="number"
+                          min="0"
+                          :max="unlocked_balance / 1e4"
+                          placeholder="0"
+                          @blur="$v.newTx.amount.$touch"
+                          hide-underline
+                          suffix="xtri"
+                      />
+                      
+                  </tritonField>
+            <q-btn class="sendBtn"
+            color="positive"
+            @click="openedSend = false, send()"
+            label="SEND"
+            />
+        </q-modal>
 
+    </template>
+       
 </q-page>
 </template>
 
@@ -184,6 +206,7 @@ export default {
 
     data () {
         return {
+            openedSend: false,
             sending: false,
             newTx: {
                 amount: 0,
@@ -305,8 +328,10 @@ export default {
             this.newTx.address = info.address
             this.newTx.payment_id = info.payment_id
         },
+        getAmount: function () {
+            return this.newTx.amount;
+        },
         // Conversion Function------------------------------------------------------------
-
         //FROM WHAT EVER CURRENCY TO XTRI
         conversionToXtri: function () {
             //xtri price in sats variable
@@ -490,6 +515,13 @@ export default {
     text-align: center;
     .send-btn {
         width: 200px;
+    }
+}
+
+.confirmBtn {
+    text-align: center;
+    .sendBtn {
+        margin-top: 2rem;
     }
 }
 </style>
