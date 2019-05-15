@@ -10,12 +10,12 @@
     <template v-else>
 
         <div class="q-pa-md">
-
             <div class="row gutter-md">
                 <!-- Amount -->
-                <div class="col-6">
-                    <tritonField label="Amount" :error="$v.newTx.amount.$error">
-                        <q-input v-model="newTx.amount"
+                <div class="col-4">
+                    <tritonField label="Amount">
+                        <q-input 
+                            v-model="newTx.amountInCurrency"
                             :dark="theme=='dark'"
                             type="number"
                             min="0"
@@ -23,13 +23,25 @@
                             placeholder="0"
                             @blur="$v.newTx.amount.$touch"
                             hide-underline
+                            @change.native="conversionToXtri()"
                         />
-                        <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e4" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
                     </tritonField>
                 </div>
 
+                <!-- Currency -->
+                <div class ="col-4">
+                  <tritonField label="Currency">
+                      <q-select :dark="theme=='dark'"
+                          v-model="newTx.currency"
+                          :options="currencyOptions"
+                          hide-underline
+                          @input="conversionToXtri()"
+                      />
+                  </tritonField>
+                </div>
+
                 <!-- Priority -->
-                <div class="col-6">
+                <div class="col-4">
                     <tritonField label="Priority">
                         <q-select :dark="theme=='dark'"
                             v-model="newTx.priority"
@@ -38,6 +50,27 @@
                         />
                     </tritonField>
                 </div>
+
+            </div>
+
+            <!-- amount in xtri-->
+            <div class="row gutter-md">
+              <div class="col-4">
+                  <tritonField label="Amount in xtri" :error="$v.newTx.amount.$error">
+                      <q-input v-model="newTx.amount"
+                          :dark="theme=='dark'"
+                          type="number"
+                          min="0"
+                          :max="unlocked_balance / 1e4"
+                          placeholder="0"
+                          @blur="$v.newTx.amount.$touch"
+                          hide-underline
+                          @change.native="conversionFromXtri()"
+                      />
+                      <q-btn color="secondary" @click="newTx.amount = unlocked_balance / 1e4; conversionFromXtri()" :text-color="theme=='dark'?'white':'dark'">All</q-btn>
+                  </tritonField>
+                  
+              </div>
             </div>
 
             <!-- Address -->
@@ -120,6 +153,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { mapState } from "vuex"
 import { required, decimal } from "vuelidate/lib/validators"
 import { payment_id, address, greater_than_zero } from "src/validators/common"
@@ -146,6 +180,8 @@ export default {
             return `${prefix}..`;
         }
     }),
+
+
     data () {
         return {
             sending: false,
@@ -154,6 +190,7 @@ export default {
                 address: "",
                 payment_id: "",
                 priority: 0,
+                currency: 0,
                 address_book: {
                     save: false,
                     name: "",
@@ -166,6 +203,30 @@ export default {
                 {label: "Normal", value: 2},
                 {label: "Fast", value: 3},
                 {label: "Fastest", value: 4},
+            ],
+            currencyOptions: [
+              {label: "USD", value: 0},
+              {label: "AUD", value: 1},
+              {label: "BRL", value: 2},
+              {label: "CAD", value: 3},
+              {label: "CHF", value: 4},
+              {label: "CLP", value: 5},
+              {label: "CNY", value: 6},
+              {label: "DKK", value: 7},
+              {label: "EUR", value: 8},
+              {label: "GBP", value: 9},
+              {label: "HKD", value: 10},
+              {label: "INR", value: 11},
+              {label: "ISK", value: 12},
+              {label: "JPY", value: 13},
+              {label: "KRW", value: 14},
+              {label: "NZD", value: 15},
+              {label: "PLN", value: 16},
+              {label: "RUB", value: 17},
+              {label: "SEK", value: 18},
+              {label: "SGD", value: 19},
+              {label: "THB", value: 20},
+              {label: "TWD", value: 21},
             ],
         }
     },
@@ -243,6 +304,104 @@ export default {
         autoFill: function (info) {
             this.newTx.address = info.address
             this.newTx.payment_id = info.payment_id
+        },
+        // Conversion Function------------------------------------------------------------
+
+        //FROM WHAT EVER CURRENCY TO XTRI
+        conversionToXtri: function () {
+            //xtri price in sats variable
+            let sats;
+            //btc prices in differnt currencies
+            let currentPrice;
+            let prices=[];
+
+            //getting xtri price in sats from Trade Ogre
+            axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
+                console.log(res.data.price);
+                sats = res.data.price;
+                
+                //getting btc price in usd
+                axios.get(`https://blockchain.info/ticker`).then(res => {
+                    //btc prices in difffernt gov currencys
+                    prices[0] = res.data.USD["15m"];
+                    prices[1] = res.data.AUD["15m"];
+                    prices[2] = res.data.BRL["15m"];
+                    prices[3] = res.data.CAD["15m"];
+                    prices[4] = res.data.CHF["15m"];
+                    prices[5] = res.data.CLP["15m"];
+                    prices[6] = res.data.CNY["15m"];
+                    prices[7] = res.data.DKK["15m"];
+                    prices[8] = res.data.EUR["15m"];
+                    prices[9] = res.data.GBP["15m"];
+                    prices[10] = res.data.HKD["15m"];
+                    prices[11] = res.data.INR["15m"];
+                    prices[12] = res.data.ISK["15m"];
+                    prices[13] = res.data.JPY["15m"];
+                    prices[14] = res.data.KRW["15m"];
+                    prices[15] = res.data.NZD["15m"];
+                    prices[16] = res.data.PLN["15m"];
+                    prices[17] = res.data.RUB["15m"];
+                    prices[18] = res.data.SEK["15m"];
+                    prices[19] = res.data.SGD["15m"];
+                    prices[20] = res.data.THB["15m"];
+                    prices[21] = res.data.TWD["15m"];
+                    
+                    currentPrice = prices[this.newTx.currency];
+
+                    //Do conversion with current currency
+                    this.newTx.amount = ((this.newTx.amountInCurrency/currentPrice)/sats).toFixed(4);       
+                    })
+                });
+            
+            return 1;
+        },
+        //FROM XTRI TO WHAT EVER CURRENCY
+        conversionFromXtri: function () {
+            //xtri price in sats variable
+            let sats;
+            //btc prices in differnt currencies
+            let currentPrice;
+            let prices=[];
+
+            //getting xtri price in sats from Trade Ogre
+            axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
+                console.log(res.data.price);
+                sats = res.data.price;
+                
+                //getting btc price in usd
+                axios.get(`https://blockchain.info/ticker`).then(res => {
+                    //btc prices in difffernt gov currencys
+                    prices[0] = res.data.USD["15m"];
+                    prices[1] = res.data.AUD["15m"];
+                    prices[2] = res.data.BRL["15m"];
+                    prices[3] = res.data.CAD["15m"];
+                    prices[4] = res.data.CHF["15m"];
+                    prices[5] = res.data.CLP["15m"];
+                    prices[6] = res.data.CNY["15m"];
+                    prices[7] = res.data.DKK["15m"];
+                    prices[8] = res.data.EUR["15m"];
+                    prices[9] = res.data.GBP["15m"];
+                    prices[10] = res.data.HKD["15m"];
+                    prices[11] = res.data.INR["15m"];
+                    prices[12] = res.data.ISK["15m"];
+                    prices[13] = res.data.JPY["15m"];
+                    prices[14] = res.data.KRW["15m"];
+                    prices[15] = res.data.NZD["15m"];
+                    prices[16] = res.data.PLN["15m"];
+                    prices[17] = res.data.RUB["15m"];
+                    prices[18] = res.data.SEK["15m"];
+                    prices[19] = res.data.SGD["15m"];
+                    prices[20] = res.data.THB["15m"];
+                    prices[21] = res.data.TWD["15m"];
+                    
+                    currentPrice = prices[this.newTx.currency];
+                    
+                    //Do conversion with current currency
+                    this.newTx.amountInCurrency = ((this.newTx.amount*currentPrice)*sats).toFixed(4);
+                })
+            });
+
+            return 1;
         },
 
         send: function () {
@@ -323,10 +482,12 @@ export default {
         tritonField
     }
 }
+
 </script>
 
 <style lang="scss">
 .send {
+    text-align: center;
     .send-btn {
         width: 200px;
     }

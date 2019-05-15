@@ -217,7 +217,7 @@ export class WalletRPC {
             break
 
         case "transfer":
-            this.transfer(params.password, params.amount, params.address, params.payment_id, params.priority, params.note || "", params.address_book)
+            this.transfer(params.password, params.amount, params.address, params.payment_id, params.priority, params.currency, params.note || "", params.address_book)
             break
 
         case "add_address_book":
@@ -831,7 +831,7 @@ export class WalletRPC {
         })
     }
 
-    transfer (password, amount, address, payment_id, priority, note, address_book = {}) {
+    transfer (password, amount, address, payment_id, priority, currency, note, address_book = {}) {
         crypto.pbkdf2(password, this.auth[2], 1000, 64, "sha512", (err, password_hash) => {
             if (err) {
                 this.sendGateway("set_tx_status", {

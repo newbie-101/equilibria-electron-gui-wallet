@@ -17,9 +17,11 @@
             <div class="navigation row items-end">
                 <router-link to="/wallet">
                     <q-btn
-                        class="single-icon"
+                        class="large-btn primary"
+                        label="Transactions"
                         size="md"
-                        icon="swap_horiz"
+                        icon-right="swap_horiz"
+                        align="left"
                     />
                 </router-link>
                 <router-link to="/wallet/send">
@@ -114,7 +116,7 @@ export default {
     }
 
     .large-btn {
-        width: 160px;
+        width: 180px;
         .q-btn-inner > *:last-child {
             margin-left: auto;
         }
