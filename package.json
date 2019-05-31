@@ -33,7 +33,7 @@
     "babel-eslint": "^10.0.1",
     "devtron": "^1.4.0",
     "electron": "^4.1.1",
-    "electron-builder": "^20.39.0",
+    "electron-builder": "^20.42.0",
     "electron-debug": "^2.1.0",
     "electron-devtools-installer": "^2.2.4",
     "electron-packager": "^13.1.1",
@@ -47,7 +47,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^5.2.2",
     "node-sass": "^4.11.0",
-    "quasar-cli": "^0.17.24",
+    "quasar-cli": "^0.17.25",
     "sass-loader": "^7.1.0",
     "strip-ansi": "^3.0.1"
   },
