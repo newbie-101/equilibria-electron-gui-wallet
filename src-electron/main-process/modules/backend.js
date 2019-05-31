@@ -109,6 +109,12 @@ export class Backend {
           port:9231},
           {host: "amsterdam.xtri.network",
           port:9231},
+          {host: "australia.xtri.network",
+          port:9231},
+          {host: "tokyo.xtri.network",
+          port:9231},
+          {host: "india.xtri.network",
+          port:9231},
         ]
 
         this.token = config.token
