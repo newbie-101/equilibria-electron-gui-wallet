@@ -25,11 +25,11 @@ export class Backend {
 
     init (config) {
         if (os.platform() === "win32") {
-            this.config_dir = "C:\\ProgramData\\triton"
-            this.wallet_dir = `${os.homedir()}\\Documents\\triton`
+            this.config_dir = "C:\\ProgramData\\equilibria"
+            this.wallet_dir = `${os.homedir()}\\Documents\\equilibria`
         } else {
-            this.config_dir = path.join(os.homedir(), ".triton")
-            this.wallet_dir = path.join(os.homedir(), "triton")
+            this.config_dir = path.join(os.homedir(), ".equilibria")
+            this.wallet_dir = path.join(os.homedir(), "equilibria")
         }
 
         if (!fs.existsSync(this.config_dir)) {

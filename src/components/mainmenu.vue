@@ -45,7 +45,7 @@
                 </p>
                 <p>
                     <a @click="openExternal('https://discordapp.com/invite/67GXfD6')" href="#">Discord</a> -
-                    <a @click="openExternal('https://www.reddit.com/r/tritoncurrency/')" href="#">Reddit</a> -
+                    <a @click="openExternal('https://www.reddit.com/r/equilibrianetwork/')" href="#">Reddit</a> -
                     <a @click="openExternal('https://github.com/triton-project/triton-electron-wallet')" href="#">Github</a>
                 </p>
             </div>

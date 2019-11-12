@@ -21,7 +21,7 @@ export class Daemon {
     checkVersion () {
         return new Promise((resolve, reject) => {
             if (process.platform === "win32") {
-                let tritond_path = path.join(__ryo_bin, "tritond.exe")
+                let tritond_path = path.join(__ryo_bin, "daemon.exe")
                 let tritond_version_cmd = `"${tritond_path}" --version`
                 if (!fs.existsSync(tritond_path)) { resolve(false) }
                 child_process.exec(tritond_version_cmd, (error, stdout, stderr) => {
@@ -29,7 +29,7 @@ export class Daemon {
                     resolve(stdout)
                 })
             } else {
-                let tritond_path = path.join(__ryo_bin, "tritond")
+                let tritond_path = path.join(__ryo_bin, "daemon")
                 let tritond_version_cmd = `"${tritond_path}" --version`
                 if (!fs.existsSync(tritond_path)) { resolve(false) }
                 child_process.exec(tritond_version_cmd, { detached: true }, (error, stdout, stderr) => {
@@ -112,7 +112,7 @@ export class Daemon {
                 args.push("--stagenet")
             }
 
-            args.push("--log-file", path.join(dirs[net_type], "logs", "tritond.log"))
+            args.push("--log-file", path.join(dirs[net_type], "logs", "daemon.log"))
 
             if (daemon.rpc_bind_ip !== "127.0.0.1") { args.push("--confirm-external-bind") }
 
@@ -125,9 +125,9 @@ export class Daemon {
             }
 
             if (process.platform === "win32") {
-                this.daemonProcess = child_process.spawn(path.join(__ryo_bin, "tritond.exe"), args)
+                this.daemonProcess = child_process.spawn(path.join(__ryo_bin, "daemon.exe"), args)
             } else {
-                this.daemonProcess = child_process.spawn(path.join(__ryo_bin, "tritond"), args, {
+                this.daemonProcess = child_process.spawn(path.join(__ryo_bin, "daemon"), args, {
                     detached: true
                 })
             }
