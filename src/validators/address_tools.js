@@ -1947,9 +1947,9 @@ return{_strlen:lb,_ge_mul8:Va,_keccak:db,_ge_scalarmult:Ta,_ge_fromfe_frombytes_
 
 var tritonConfig = {
     coinUnitPlaces: 12,
-    coinSymbol: 'triton',
-    coinName: 'triton',
-    coinUriPrefix: 'triton:',
+    coinSymbol: 'equilibria',
+    coinName: 'equilibria',
+    coinUriPrefix: 'equilibria:',
     addressPrefix: 114,
 };
 

@@ -174,9 +174,9 @@ module.exports = function (ctx) {
             builder: {
                 // https://www.electron.build/configuration/configuration
 
-                appId: "com.tritonnetwork.wallet",
-                productName: "Triton Wallet Atom",
-                copyright: "Copyright © 2018-2019 Triton Project, 2018 Ryo Currency Project, 2018 Loki Network",
+                appId: "com.equilibria.wallet",
+                productName: "Equilibria Wallet",
+                copyright: "Copyright © 2018-2019 Equilibria Project, 2018 Ryo Currency Project, 2018 Loki Network",
 
                 // directories: {
                 //     buildResources: "src-electron/build"

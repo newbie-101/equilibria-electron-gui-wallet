@@ -1,9 +1,9 @@
 # Triton Electron GUI Wallet
 
 ### Introduction
-XTRI is a private cryptocurrency based on Monero. Triton aims to release the first completely private ‘mint and burn’ stablecoin. Users will be able to burn our volatile coin Triton (XTRI), a fork of Monero, to mint a market equivalent amount of the Sao Dollar (SAO) – one SAO = $1 US. In turn, each SAO can be burned to mint $1 of XTRI.
+XEQ is a private cryptocurrency based on Monero. Triton aims to release the first completely private ‘mint and burn’ stablecoin. Users will be able to burn our volatile coin Triton (XTRI), a fork of Monero, to mint a market equivalent amount of the Sao Dollar (SAO) – one USQD = $1 US. In turn, each SAO can be burned to mint $1 of XEQ.
 
-More information on the project can be found on the [website](https://xtri.network) and in the [whitepaper](https://cdn.discordapp.com/attachments/475870345010741269/561469142826483712/Triton_whitepaper_v3.1.pdf). Triton is an open source project, and we encourage contributions from anyone with something to offer. 
+More information on the project can be found on the [website](https://equilibria.network) and in the [whitepaper](https://cdn.discordapp.com/attachments/475870345010741269/561469142826483712/Triton_whitepaper_v3.1.pdf). Triton is an open source project, and we encourage contributions from anyone with something to offer. 
 <p align="center">
  <img src="https://pbs.twimg.com/media/D2-ej8HU4AEB2l-.jpg" width="600">
 </p>

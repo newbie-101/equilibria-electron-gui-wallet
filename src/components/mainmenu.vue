@@ -1,6 +1,6 @@
 <template>
 <div>
-    <q-btn class="menu" icon="menu" size="md" flat>
+    <q-btn class="menu" icon="menu" size="lg" flat style="margin: 20px">
         <q-popover>
             <q-list separator link>
                 <q-item v-close-overlay @click.native="switchWallet" v-if="!disableSwitchWallet">
@@ -31,7 +31,7 @@
     <q-modal minimized ref="aboutModal">
         <div class="about-modal">
 
-            <img class="q-mb-md" src="statics/triton.png" height="42" />
+            <img class="q-mb-md" src="equilibria.svg" />
 
             <p class="q-my-sm">Version: ATOM v{{version}}-v{{daemonVersion}}</p>
             <p class="q-my-sm">Copyright (c) 2018-2019, Triton Project</p>
@@ -41,7 +41,7 @@
 
             <div class="q-mt-md q-mb-lg external-links">
                 <p>
-                    <a @click="openExternal('https://xtri.network/')" href="#">https://xtri.network/</a>
+                    <a @click="openExternal('https://equilibria.network/')" href="#">https://equilibria.network/</a>
                 </p>
                 <p>
                     <a @click="openExternal('https://discordapp.com/invite/67GXfD6')" href="#">Discord</a> -

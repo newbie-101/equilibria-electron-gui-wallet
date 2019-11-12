@@ -53,10 +53,10 @@
 
             </div>
 
-            <!-- amount in xtri-->
+            <!-- amount in xeq-->
             <div class="row gutter-md">
               <div class="col-4">
-                  <tritonField label="Amount in xtri" :error="$v.newTx.amount.$error">
+                  <tritonField label="Amount in xeq" :error="$v.newTx.amount.$error">
                       <q-input v-model="newTx.amount"
                           :dark="theme=='dark'"
                           type="number"
@@ -158,7 +158,7 @@
                           placeholder="0"
                           @blur="$v.newTx.amount.$touch"
                           hide-underline
-                          suffix="xtri"
+                          suffix="xeq"
                       />
                       
                   </tritonField>
@@ -341,7 +341,7 @@ export default {
             let prices=[];
 
             //getting xtri price in sats from Trade Ogre
-            axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
+            axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XEQ`).then(res => {
                 console.log(res.data.price);
                 sats = res.data.price;
                 
@@ -389,7 +389,7 @@ export default {
             let prices=[];
 
             //getting xtri price in sats from Trade Ogre
-            axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XTRI`).then(res => {
+            axios.get(`https://tradeogre.com/api/v1/ticker/BTC-XEQ`).then(res => {
                 console.log(res.data.price);
                 sats = res.data.price;
                 

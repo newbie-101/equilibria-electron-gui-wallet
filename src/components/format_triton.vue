@@ -1,6 +1,6 @@
 <template>
 <span>
-    {{ value }} xtri
+    {{ value }} xeq
 </span>
 </template>
 

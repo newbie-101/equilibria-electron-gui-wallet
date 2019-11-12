@@ -35,7 +35,7 @@ let template = [
         submenu: [
             {
                 label: "Learn More",
-                click () { require("electron").shell.openExternal("https://xtri.network/") }
+                click () { require("electron").shell.openExternal("https://equilibria.cc") }
             }
         ]
     }
@@ -43,7 +43,7 @@ let template = [
 
 if (process.platform === "darwin") {
     template.unshift({
-        label: "triton Wallet Atom",
+        label: "Equilibria Wallet",
         submenu: [
             { role: "about" },
             { type: "separator" },

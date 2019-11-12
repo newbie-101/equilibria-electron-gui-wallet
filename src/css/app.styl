@@ -2,8 +2,8 @@
 @import '~variables'
 
 @font-face {
-    font-family: 'Poppins-Light';
-    src: url(themes/Poppins-Light.ttf)
+    font-family: 'Roboto-Light';
+    src: url(themes/Roboto-Light.ttf)
 }
 
 ::selection {
@@ -50,7 +50,7 @@ footer,
 }
 
 .monospace {
-    font-family: 'Poppins-Light', monospace
+    font-family: 'Roboto-Light', monospace
 }
 
 .break-all {
@@ -93,8 +93,7 @@ footer,
 .q-layout-header {
     background: #0A0A0A;
     box-shadow: none;
-    border-bottom: 1px solid #333;
-    height: 48px;
+    height: 90px;
 
     .q-toolbar-title {
         font-size: 16px;
@@ -218,12 +217,14 @@ footer,
 }
 
 .q-layout-footer.status-footer {
-    background: #000000;
-    color: rgba(255, 255, 255, 0.51);
+    background: #111111;
+    color: white
     border-top: 1px solid #333;
     padding-top: 2px;
     box-shadow: none;
     font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
 
     .status-line {
         padding: 8px;

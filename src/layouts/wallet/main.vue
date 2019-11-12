@@ -3,8 +3,8 @@
     <q-layout-header class="shift-title">
         <main-menu />
         <q-toolbar-title>
-            <div class="flex items-center justify-center" style="margin-top:7px">
-                <img src="statics/triton2.png" height="32">
+            <div class="flex items-center justify-center" style="margin-top:0px">
+                <img src="statics/equilibria.svg" height="100">
             </div>
         </q-toolbar-title>
     </q-layout-header>

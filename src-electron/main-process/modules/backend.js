@@ -60,7 +60,7 @@ export class Backend {
         const daemons = {
             mainnet: {
                 ...daemon,
-                remote_host: "sanfran.xtri.network",
+                remote_host: "sanfran.equilibria.network",
                 remote_port: 9231
             },
             stagenet: {
@@ -103,21 +103,21 @@ export class Backend {
         }
 
         this.remotes = [
-          {host: "sanfran.xtri.network",
+          {host: "sanfran.equilibria.network",
           port:9231},
-          {host: "newyork.xtri.network",
+          {host: "newyork.equilibria.network",
           port:9231},
-          {host: "amsterdam.xtri.network",
+          {host: "amsterdam.equilibria.network",
           port:9231},
-          {host: "sydney.xtri.network",
+          {host: "sydney.equilibria.network",
           port:9231},
-          {host: "tokyo.xtri.network",
+          {host: "tokyo.equilibria.network",
           port:9231},
-          {host: "india.xtri.network",
+          {host: "india.equilibria.network",
           port:9231},
-          {host: "toronto.xtri.network",
+          {host: "toronto.equilibria.network",
           port:9231},
-          {host: "dallas.xtri.network",
+          {host: "dallas.equilibria.network",
           port:9231},
         ]
 
@@ -234,7 +234,7 @@ export class Backend {
 
         case "open_explorer":
             if (params.type == "tx") {
-                require("electron").shell.openExternal("https://explorer.xtri.network/tx/" + params.id)
+                require("electron").shell.openExternal("https://explorer.equilibria.network/tx/" + params.id)
             }
             break
 
