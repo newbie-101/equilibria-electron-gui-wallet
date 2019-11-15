@@ -20,7 +20,7 @@
                 </q-item>
                 <q-item v-close-overlay @click.native="exit">
                     <q-item-main>
-                        <q-item-tile label>Exit Triton GUI Wallet</q-item-tile>
+                        <q-item-tile label>Exit Equilibria Wallet</q-item-tile>
                     </q-item-main>
                 </q-item>
             </q-list>
@@ -34,7 +34,7 @@
             <img class="q-mb-md" src="equilibria.svg" />
 
             <p class="q-my-sm">Version: ATOM v{{version}}-v{{daemonVersion}}</p>
-            <p class="q-my-sm">Copyright (c) 2018-2019, Triton Project</p>
+            <p class="q-my-sm">Copyright (c) 2018-2019, Equilibria Project</p>
             <p class="q-my-sm">Copyright (c) 2018-2019, Loki Project</p>
             <p class="q-my-sm">Copyright (c) 2018, Ryo Currency Project</p>
             <p class="q-my-sm">All rights reserved.</p>
